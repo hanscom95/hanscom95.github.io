@@ -1,1 +1,63 @@
-theme: jekyll-theme-cayman
+title: 달상자 Blog
+description: 공부하려고 만든 블로그
+author: TAEHOON
+github: https://github.com/hanscom95
+about: 개발용 공부를 위해 만든 블로그 입니다. 백엔드를 주로 개발하나 프론트, DevOps, 앱, BlockChain 등도 같이 개발하고 있습니다.
+disqus_shortname: hanscom95
+#google_analytics: UA-XXXXXXXX-Y
+
+enableTags: true
+tagarray: []
+
+collections:
+  project:
+    output: true
+    permalink: /project/:path/
+
+social:
+  - icon: fa-facebook
+    link: "https://www.facebook.com/people/%EB%AC%B8%ED%83%9C%ED%9B%88/100002479598118/"
+  - icon: fa-instagram
+    link: "https://www.instagram.com/moon_developer_93"
+  - icon: fa-github
+    link: "https://github.com/hanscom95"
+#  - icon: fa-twitter
+#    link: "#"
+#  - icon: fa-linkedin
+#    link: "#"
+#  - icon: fa-stack-exchange
+#    link: "#"
+
+share:
+#  twitter_username: github.io
+  fb_appid: 100002479598118
+
+urls:
+  - text: Category
+    url: /category/all
+
+  - text: My Study
+    url: /projects/
+  - text: About Me
+    url: "https://hanscom95.github.io/about"
+    #    url: /about/
+
+#  - text: XML Feed
+#    url: /feed.xml
+
+url: "https://hanscom95.github.io"
+baseurl: ""
+paginate: 20
+per_page: 20
+paginate_path: "/page/:num/"
+markdown: kramdown
+gems:
+  - jekyll-paginate
+  - jekyll-gist
+
+compress_html:
+  clippings: all
+  comments: ["<!-- ", " -->"]
+  endings: all
+  ignore:
+    envs: ['development']

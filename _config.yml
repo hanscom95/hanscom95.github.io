@@ -36,8 +36,9 @@ urls:
   - text: Category
     url: /category/all
 
-  - text: My Study
+  - text: My Project
     url: /projects/
+
   - text: About Me
     url: "https://hanscom95.github.io/about"
     #    url: /about/

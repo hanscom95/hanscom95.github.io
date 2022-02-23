@@ -5,6 +5,7 @@ github: https://github.com/hanscom95
 about: 개발용 공부를 위해 만든 블로그 입니다. 백엔드를 주로 개발하나 프론트, DevOps, 앱, BlockChain 등도 같이 개발하고 있습니다.
 disqus_shortname: hanscom95
 #google_analytics: UA-XXXXXXXX-Y
+google_analytics: G-927YFD8L1S
 
 enableTags: true
 tagarray: []
@@ -36,7 +37,7 @@ urls:
   - text: Category
     url: /category/all
 
-  - text: My Project
+  - text: Project
     url: /projects/
 
   - text: About Me
@@ -47,7 +48,7 @@ urls:
 #    url: /feed.xml
 
 url: "https://hanscom95.github.io"
-baseurl: ""
+baseurl: "https://hanscom95.github.io"
 paginate: 20
 per_page: 20
 paginate_path: "/page/:num/"

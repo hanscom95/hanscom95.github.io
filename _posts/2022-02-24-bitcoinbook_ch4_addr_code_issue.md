@@ -20,7 +20,7 @@ Address: 1PRTTaJesdNovgne6Ehcdu1fpEdX7913CK
 ```
 
 **에러**
-![amazon-rds 1](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png.png)
+![amazon-rds 1](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png)
 
 
 

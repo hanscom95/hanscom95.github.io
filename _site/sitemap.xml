@@ -5,8 +5,8 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 Feb 2022 13:14:33 +0900</pubDate>
-    <lastBuildDate>Thu, 24 Feb 2022 13:14:33 +0900</lastBuildDate>
+    <pubDate>Thu, 24 Feb 2022 13:15:47 +0900</pubDate>
+    <lastBuildDate>Thu, 24 Feb 2022 13:15:47 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -25,7 +25,7 @@ Address: 1PRTTaJesdNovgne6Ehcdu1fpEdX7913CK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;에러&lt;/strong&gt;
-&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png.png&quot; alt=&quot;amazon-rds 1&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png&quot; alt=&quot;amazon-rds 1&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;소스수정&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;addr.cpp

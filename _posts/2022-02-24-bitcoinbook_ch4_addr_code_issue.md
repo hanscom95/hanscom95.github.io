@@ -5,7 +5,7 @@ date: 2022-02-24 13:10:00 +0900       # (require) a post date
 categories: [all, bitcoin, 마스터링 비트코인, issue]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
 ---
 
-# 마스터링 비트코인 ch4 addr code error. 'bitcoin/bitcoin.hpp' no such file or directory
+# 마스터링 비트코인 ch4 addr error.'bitcoin/bitcoin.hpp' no such file or directory
 마스터링 비트코인 ch4장에 나오는 cpp 예제 중 addr.cpp 아래 소스대로 되어야 할 부분이 버전 문제인지 에러가 발생 했다.  
 찾아보니 libbitcoin 최신 버전에 맞게 컴파일 하는 방법이 밖인걸 확인 소스 수정과 실행 명령어를 바꿔 작업하니 잘돌아가네...
 

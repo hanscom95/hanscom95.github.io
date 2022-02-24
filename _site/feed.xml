@@ -3,11 +3,64 @@
   <channel>
     <title>달상자 Blog</title>
     <description>공부하려고 만든 블로그</description>
-    <link>https://hanscom95.github.iohttps://hanscom95.github.io/</link>
-    <atom:link href="https://hanscom95.github.iohttps://hanscom95.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Feb 2022 10:43:18 +0900</pubDate>
-    <lastBuildDate>Wed, 23 Feb 2022 10:43:18 +0900</lastBuildDate>
+    <link>https://hanscom95.github.io/</link>
+    <atom:link href="https://hanscom95.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 24 Feb 2022 13:14:33 +0900</pubDate>
+    <lastBuildDate>Thu, 24 Feb 2022 13:14:33 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>마스터링 비트코인 ch4 addr code error</title>
+        <description>&lt;h1 id=&quot;마스터링-비트코인-ch4-addr-errorbitcoinbitcoinhpp-no-such-file-or-directory&quot;&gt;마스터링 비트코인 ch4 addr error.’bitcoin/bitcoin.hpp’ no such file or directory&lt;/h1&gt;
+&lt;p&gt;마스터링 비트코인 ch4장에 나오는 cpp 예제 중 addr.cpp 아래 소스대로 되어야 할 부분이 버전 문제인지 에러가 발생 했다.&lt;br /&gt;
+찾아보니 libbitcoin 최신 버전에 맞게 컴파일 하는 방법이 밖인걸 확인 소스 수정과 실행 명령어를 바꿔 작업하니 잘돌아가네…&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;예제&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Compile the addr.cpp code
+$ g++ -o addr addr.cpp -std=c++11 $(pkg-config --cflags --libs libbitcoin)
+# Run the addr executable
+$ ./addr
+Public key: 0202a406624211f2abbdc68da3df929f938c3399dd79fac1b51b0e4ad1d26a47aa
+Address: 1PRTTaJesdNovgne6Ehcdu1fpEdX7913CK
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;에러&lt;/strong&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png.png&quot; alt=&quot;amazon-rds 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;소스수정&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;addr.cpp
+
+#include &amp;lt;bitcoin/bitcoin.hpp&amp;gt; 
+------------------------------  
+#include &amp;lt;bitcoin/system.hpp&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;실행명령어 추가(–static)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ g++ -o addr ./addr.cpp -std=c++11 $(pkg-config --cflags --libs --static libbitcoin-system)
+$ ./addr
+Public key: 0202a406624211f2abbdc68da3df929f938c3399dd79fac1b51b0e4ad1d26a47aa
+Address: 1PRTTaJesdNovgne6Ehcdu1fpEdX7913CK
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이래도 안될시 PKG_CONFIG_PATH가 안잡혀 있을 수 있다. home root에 ln 설정 해주면 해결&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vi  ~/.bahrc
+export PKG_CONFIG_PATH=/path/to/libbitcoin-installation/lib/pkgconfig
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Thu, 24 Feb 2022 13:10:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/issue/2022/02/24/bitcoinbook_ch4_addr_code_issue.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/issue/2022/02/24/bitcoinbook_ch4_addr_code_issue.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>bitcoin</category>
+        
+        <category>마스터링 비트코인</category>
+        
+        <category>issue</category>
+        
+      </item>
     
       <item>
         <title>wellcome to taehoon blog</title>
@@ -18,8 +71,8 @@
 여행 가고 싶다아…&lt;/p&gt;
 </description>
         <pubDate>Mon, 21 Feb 2022 15:05:00 +0900</pubDate>
-        <link>https://hanscom95.github.iohttps://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</link>
-        <guid isPermaLink="true">https://hanscom95.github.iohttps://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</guid>
+        <link>https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</guid>
         
         
         <category>all</category>

@@ -42,7 +42,8 @@ bundle add webrick
 bundle install --redownload  
 
 bundle install  
-bundle exec jekyll serve  
+bundle exec jekyll serve
+bundle exec jekyll build  
 
 exampe)  
 https://www.earthinversion.com/blogging/how-to-install-jekyll-on-appple-m1-macbook/  

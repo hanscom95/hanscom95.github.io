@@ -5,8 +5,8 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Feb 2022 12:39:34 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Feb 2022 12:39:34 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Feb 2022 12:44:30 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Feb 2022 12:44:30 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -19,16 +19,15 @@
   &lt;li&gt;사용자의 키를 저장하고 관리하는데 사용되는 데이터 구조&lt;/li&gt;
   &lt;li&gt;구조 파일이나 데이터베이스로 구현되는 개인키 저장소&lt;/li&gt;
   &lt;li&gt;개인키/공개키 쌍이 담겨있는 열쇠고리&lt;/li&gt;
-  &lt;li&gt;지갑에는 키만 들어있으며, 코인은 들어있지 않다.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;2-지갑-기술의-개요&quot;&gt;2. 지갑 기술의 개요&lt;/h2&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;비트코인 지갑에는 키만 들어있으며, 코인은 들어있지 않다.&lt;/p&gt;
-&lt;/blockquote&gt;
-
 &lt;ul&gt;
-  &lt;li&gt;지갑의 분류는 비결정적 지갑, 결정적 지갑으로 나뉜다.&lt;/li&gt;
+  &lt;li&gt;지갑의 분류는 비결정적 지갑, 결정적 지갑으로 나뉜다.
+    &lt;blockquote&gt;
+      &lt;p&gt;비트코인 지갑에는 키만 들어있으며, 코인은 들어있지 않다.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;21-비결정적-지갑&quot;&gt;2.1 비결정적 지갑&lt;/h3&gt;

@@ -76,4 +76,4 @@ categories: [all, bitcoin, 마스터링 비트코인]          # (custom) some c
 그림6 루트 시드에서 마스터 키와 체인코드 생성
 
 ## ○ 참고문서
-* [bitcoinbook](http://https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch05.asciidoc)
+* [bitcoinbook](https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch05.asciidoc)

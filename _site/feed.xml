@@ -5,8 +5,8 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Feb 2022 12:36:28 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Feb 2022 12:36:28 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Feb 2022 12:39:34 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Feb 2022 12:39:34 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -112,7 +112,7 @@
 
 &lt;h2 id=&quot;-참고문서&quot;&gt;○ 참고문서&lt;/h2&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch05.asciidoc&quot;&gt;bitcoinbook&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch05.asciidoc&quot;&gt;bitcoinbook&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 28 Feb 2022 10:42:00 +0900</pubDate>

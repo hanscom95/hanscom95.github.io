@@ -6,8 +6,10 @@ categories: [all, bitcoin, 마스터링 비트코인, issue]          # (custom)
 ---
 
 # 마스터링 비트코인 ch4 addr error.'bitcoin/bitcoin.hpp' no such file or directory
-마스터링 비트코인 ch4장에 나오는 cpp 예제 중 addr.cpp 아래 소스대로 되어야 할 부분이 버전 문제인지 에러가 발생 했다.  
-찾아보니 libbitcoin 라이브러리가 최신 버전으로 설치되어 있어 소스를 수정해야 됬다.
+마스터링 비트코인 ch4장에 나오는 cpp 예제 중 addr.cpp 아래 소스대로 되어야 할 부분이 버전 문제인지 에러가 발생  
+`No package 'libbitcoin' found
+fatal error: bitcoin/bitcoin.hpp: No such file or directory`  
+찾아보니 libbitcoin 라이브러리가 최신 버전으로 설치되어 있어 소스를 수정 했다.
 
 **예제**
 ```
@@ -20,7 +22,7 @@ Address: 1PRTTaJesdNovgne6Ehcdu1fpEdX7913CK
 ```
 
 **에러**
-![amazon-rds 1](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png)
+![addr error](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png)
 
 
 

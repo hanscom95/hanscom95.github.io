@@ -42,7 +42,7 @@ bundle add webrick
 bundle install --redownload  
 
 bundle install  
-bundle exec jekyll serve
+bundle exec jekyll serve  
 bundle exec jekyll build  
 
 exampe)  

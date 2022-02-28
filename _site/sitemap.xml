@@ -5,15 +5,132 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 24 Feb 2022 13:25:14 +0900</pubDate>
-    <lastBuildDate>Thu, 24 Feb 2022 13:25:14 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Feb 2022 12:24:29 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Feb 2022 12:24:29 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>마스터링 비트코인 ch5</title>
+        <description>&lt;h1 id=&quot;마스터링-비트코인-ch5-지갑&quot;&gt;마스터링 비트코인 ch5 지갑&lt;/h1&gt;
+
+&lt;h2 id=&quot;1-서론---지갑&quot;&gt;1. 서론 - 지갑&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;사용자 인터페이스 역할을 하는 주요 어플리케이션&lt;/li&gt;
+  &lt;li&gt;사용자의 키를 저장하고 관리하는데 사용되는 데이터 구조&lt;/li&gt;
+  &lt;li&gt;구조 파일이나 데이터베이스로 구현되는 개인키 저장소&lt;/li&gt;
+  &lt;li&gt;개인키/공개키 쌍이 담겨있는 열쇠고리&lt;/li&gt;
+  &lt;li&gt;지갑에는 키만 들어있으며, 코인은 들어있지 않다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-지갑-기술의-개요&quot;&gt;2. 지갑 기술의 개요&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;비트코인 지갑에는 키만 들어있으며, 코인은 들어있지 않다.&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;지갑의 분류는 비결정적 지갑, 결정적 지갑으로 나뉜다.
+      &lt;h3 id=&quot;21-비결정적-지갑&quot;&gt;2.1 비결정적 지갑&lt;/h3&gt;
+    &lt;/li&gt;
+    &lt;li&gt;각각의 키가 난수 생성기로부터 독립적으로 생성&lt;/li&gt;
+    &lt;li&gt;지갑 내 키들은 서로 연관성 없음&lt;/li&gt;
+    &lt;li&gt;무작위로 생성한 후 필요한 만큼 추가로 생성하며, 각 키들은 단 한번만 사용
+      &lt;ul&gt;
+        &lt;li&gt;무작위로 뽑은 키들이 한번 생성된 후에는 모두 복사본을 보관해야 함&lt;/li&gt;
+        &lt;li&gt;지갑이 자주 백업되어야 함&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;주소를 다시 사용하게 되면 여러 건의 거래와 주소가 연관되기 때문에 프라이버시 노출&lt;/li&gt;
+    &lt;li&gt;JBOK지갑(Just a Bunch Of Keys)&lt;br /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_1.png&quot; alt=&quot;그림1&quot; /&gt;&lt;br /&gt;
+그림1 비결정적 지갑: 무작위로 생성된 키 모음&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;22-결정적-지갑&quot;&gt;2.2 결정적 지갑&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;단일 시드(Seed)로부터 많은 키를 쉽게 얻기 위해 개발&lt;/li&gt;
+  &lt;li&gt;모든 키가 시드(Seed)라고 알려져있는 하나의 마스터 키에서 파생&lt;/li&gt;
+  &lt;li&gt;지갑 내 모든 키들은 서로 연관&lt;/li&gt;
+  &lt;li&gt;시드(Seed) 원본을 가지고 있으면 누구나 다시 지갑 생성 가능
+    &lt;h4 id=&quot;221-일반-결정적-지갑&quot;&gt;2.2.1 일반 결정적 지갑&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;일반적으로 해시 함수를 이용하여 공통 시드에서 얻은 개인키 보관&lt;/li&gt;
+  &lt;li&gt;시드는 개인키를 추출하기 위해 색인번호나 ‘체인코드’등의 여러 데이터와 무작위로 생성된 숫자가 결합되어 있는 형태&lt;br /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_2.png&quot; alt=&quot;그림2&quot; /&gt;&lt;br /&gt;
+그림2 결정적(Seed) 지갑: 시드에서 파생된 결정론적 키 시퀀스
+    &lt;h4 id=&quot;222-hd계층결정적-지갑-bip-32bip-44&quot;&gt;2.2.2 HD(계층결정적) 지갑 [BIP-32/BIP-44]&lt;/h4&gt;
+  &lt;/li&gt;
+  &lt;li&gt;결정적 지갑 중 가장 발달된 유형&lt;/li&gt;
+  &lt;li&gt;트리 구조에서 생성된 키 보관&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;BIP-32표준에서 규정&lt;/p&gt;
+
+    &lt;blockquote&gt;
+      &lt;p&gt;사용자들이 공개키에 대응하는 개인키에 접근하지 않고도 공개키 열을 생성할 수 있음. 안전하지 않은 서버 상에서나 수신 기능만을 가지고 있는 서버에서도 HD지갑 사용 가능하며 각각의 거래에 대해 다른 공개키를 발급 받을 수 있음&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_3.png&quot; alt=&quot;그림3&quot; /&gt;&lt;br /&gt;
+그림3 결정적 지갑: 단일 시드에서 생성된 키 트리&lt;/p&gt;
+
+&lt;h2 id=&quot;3-자세한-지갑-기술&quot;&gt;3. 자세한 지갑 기술&lt;/h2&gt;
+&lt;p&gt;비트코인 지갑 기술이 발전함에 따라 상호운용성, 편리성, 안전성, 유연성 강화를 위한 공통의 산업 표준이 등장&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;BIP-39 기반 연상기호 코드 워드&lt;/li&gt;
+  &lt;li&gt;BIP-32 기반 HD 지갑&lt;/li&gt;
+  &lt;li&gt;BIP-43 기반 다용도 HD 지갑 구조&lt;/li&gt;
+  &lt;li&gt;BIP-44 기반 복수 계좌&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;31-bip-39-기반-연상기호-코드-워드&quot;&gt;3.1 BIP-39 기반 연상기호 코드 워드&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;결정적 지갑을 추출하기 위해 시드를 이용한 난수를 인코딩 하는 영어 단어열[니모닉(Mnemonic) 코드 워드]&lt;/li&gt;
+  &lt;li&gt;단어열만 있으면 시드를 재현할 수 있고, 시드에서 지갑과 추출키 전부를 재현할 수 있다.&lt;/li&gt;
+  &lt;li&gt;연상기호 코드는 무작위 순열에 비해 쉽게 읽히고 정확하게 입력되기 때문에 사용자들이 지갑을 백업하는 작업을 더욱 수월하게 해준다.&lt;/li&gt;
+  &lt;li&gt;연상기호 코드를 이용해 결정론적 지갑을 실행하는 지갑 어플리케이션은 처음 지갑을 생성할 때 12-24 단어로 구성된 단어열을 사용자에게 보여준다. 단어열은 지갑을 백업해 놓은 것으로 동일한 지갑 어플리케이션이나 호환가능한 지갑 어플리케이션안에 들어있는 키 전부를 복원하고 재현하는데 사용할 수 있다.
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_4.png&quot; alt=&quot;그림4&quot; /&gt;
+그림4 엔트로피 생성해서 연상기호 워드로 인코딩 과정
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_5.png&quot; alt=&quot;그림5&quot; /&gt;
+그림5 니모닉에서 시드로
+    &lt;blockquote&gt;
+      &lt;p&gt;2048 라운드의 해싱이 포함된 키 홛장 기능은 니모닉 또는 암호 문구에 대한 무차별 대입 공격에 대해 효과적인 보호 기능(계산시 많은 비용 소모)&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;32-시드로부터-hd-지갑-생성&quot;&gt;3.2 시드로부터 HD 지갑 생성&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;128, 256, 512비트 크기의 무작위 숫자인 루트 시드(Root Seed) 한개로부터 생성된다. 이 시드는 연상기호에 생성되는 것이 가장 일반적&lt;/li&gt;
+  &lt;li&gt;모든 키들은 이 루트 시드로부터 결정적으로 추출되며, 이 루트 시드 덕분에 호환 가능한 어떤 HD 지갑에서도 HD 지갑 전체를 재현할 수 있다. 수천 혹은 수백만 개의 키를 담고 있는 HD 지갑 이라도 루트 시다만 전송하면 백업이나 복원, export, import가 가능&lt;/li&gt;
+  &lt;li&gt;루트 시드는 HMAC-SHA512 알고리즘에 입력되고, 그 결과로 나온 해시값이 마스터 개인키와 마스터 체인코드를 생성&lt;br /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_5.png&quot; alt=&quot;그림6&quot; /&gt;
+그림6 루트 시드에서 마스터 키와 체인코드 생성&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-참고문서&quot;&gt;○ 참고문서&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch05.asciidoc&quot;&gt;bitcoinbook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 28 Feb 2022 10:42:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/28/bitcoinbook_ch5.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/28/bitcoinbook_ch5.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>bitcoin</category>
+        
+        <category>마스터링 비트코인</category>
+        
+      </item>
     
       <item>
         <title>마스터링 비트코인 ch4 addr code error</title>
         <description>&lt;h1 id=&quot;마스터링-비트코인-ch4-addr-errorbitcoinbitcoinhpp-no-such-file-or-directory&quot;&gt;마스터링 비트코인 ch4 addr error.’bitcoin/bitcoin.hpp’ no such file or directory&lt;/h1&gt;
-&lt;p&gt;마스터링 비트코인 ch4장에 나오는 cpp 예제 중 addr.cpp 아래 소스대로 되어야 할 부분이 버전 문제인지 에러가 발생 했다.&lt;br /&gt;
-찾아보니 libbitcoin 라이브러리가 최신 버전으로 설치되어 있어 소스를 수정해야 됬다.&lt;/p&gt;
+&lt;p&gt;마스터링 비트코인 ch4장에 나오는 cpp 예제 중 addr.cpp 아래 소스대로 되어야 할 부분이 버전 문제인지 에러가 발생&lt;br /&gt;
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;No package &apos;libbitcoin&apos; found
+fatal error: bitcoin/bitcoin.hpp: No such file or directory&lt;/code&gt;&lt;br /&gt;
+찾아보니 libbitcoin 라이브러리가 최신 버전으로 설치되어 있어 소스를 수정 했다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;예제&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# Compile the addr.cpp code
@@ -25,7 +142,7 @@ Address: 1PRTTaJesdNovgne6Ehcdu1fpEdX7913CK
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;에러&lt;/strong&gt;
-&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png&quot; alt=&quot;amazon-rds 1&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_addr1.png&quot; alt=&quot;addr error&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;소스수정&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;addr.cpp
@@ -76,6 +193,110 @@ export PKG_CONFIG_PATH=/path/to/libbitcoin-installation/lib/pkgconfig
         
         
         <category>all</category>
+        
+      </item>
+    
+      <item>
+        <title>마스터링 비트코인 ch3</title>
+        <description>&lt;h1 id=&quot;마스터링-비트코인-ch3-비트코인-코어참조구현개발환경-세팅&quot;&gt;마스터링 비트코인 ch3 비트코인 코어:참조구현(개발환경 세팅)&lt;/h1&gt;
+&lt;p&gt;비트코인 코어 3장 개발환경 세팅&lt;br /&gt;
+풀 인덱스 노드 설정&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;개발환경&lt;/strong&gt;&lt;br /&gt;
+docker 20.10.8 / Ubuntu 20.04 / BitcoinCore v22.0 / HDD 4tb / RAM 32GB&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ apt-get update
+$ apt-get upgrade
+$ apt-get install git
+$ git clone https://github.com/bitcoin/bitcoin.git
+$ git checkout v22.0
+$ git status
+$ apt-get install build-essential libtool autotools-dev automake pkg-config bsdmainutils python3
+$ apt-get install libevent-dev libboost-dev
+$ apt-get install libdb4.8-dev libdb4.8++-dev
+$ apt-get install libqrencode-dev autoconf openssl libssl-dev libevent-dev
+$ apt install libsqlite3-dev
+$ apt install libminiupnpc-dev libnatpmp-dev
+$ apt install systemtap-sdt-dev
+
+$ ./autogen.sh
+$ ./configure BDB_LIBS=&quot;/home/ubuntu/bitcoin/db4/lib -ldb_cxx-4.8&quot; BDB_CFLAGS=&quot;/home/ubuntu/bitcoin/db4/include&quot; --without-gui -prefix=/home/ubuntu/bitcoin/
+$ ./contrib/install_db4.sh `pwd`
+$ make
+$ make install
+
+$ bitcoind -datadir=/home/ubuntu/bitcoin/data -daemon
+$ bitcoind -printconsole
+$ chmod 766 -R ./data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;설치가 성공적으로 끝나면 API테스트&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ bitcoin-cli getblockchaininfo
+{
+    &quot;version&quot;: 150000, 
+    &quot;subversion&quot;: &quot;/Satoshi:0.15.0/&quot;, 
+    &quot;protocolversion&quot;: 70015, 
+    &quot;localservices&quot;: &quot;000000000000000d&quot;, 
+    &quot;localrelay&quot;: true, 
+    &quot;timeoffset&quot;: 0, 
+    &quot;networkactive&quot;: true, 
+    &quot;connections&quot;: 8, 
+    &quot;networks&quot;: [ 
+    ... 
+    detailed information about all networks (ipv4, ipv6 or onion) 
+    ... 
+    ], 
+    &quot;relayfee&quot;: 0.00001000, 
+    &quot;incrementalfee&quot;: 0.00001000, 
+    &quot;localaddresses&quot;: [ 
+    ], 
+    &quot;warnings&quot;: &quot;”
+}
+
+$ bitcoin-cli getblockhash 1000
+00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09
+
+$ bitcoin-cli getrawtransaction 7957a35fe64f80d234d76d83a2a8f1a0d8149a41d81de548f0a65a8a999f6f18
+0100000001524d288f25cada331c298e21995ad070e1d1a0793e818f2f7cfb5f6122ef3e71000000008c493046022100a59e516883459706ac2e6ed6a97ef9788942d3c96a0108f2699fa48d9a5725d1022100f9bb4434943e87901c0c96b5f3af4e7ba7b83e12c69b1edbfe6965f933fcd17d014104e5a0b4de6c09bd9d3f730ce56ff42657da3a7ec4798c0ace2459fb007236bc3249f70170509ed663da0300023a5de700998bfec49d4da4c66288a58374626c8dffffffff0180969800000000001976a9147f9b1a7fb68d60c536c2fd8aeaa53a8f3cc025a888ac00000000
+
+$ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d1a0793e818f2f7cfb5f6122ef3e71000000008c493046022100a59e516883459706ac2e6ed6a97ef9788942d3c96a0108f2699fa48d9a5725d1022100f9bb4434943e87901c0c96b5f3af4e7ba7b83e12c69b1edbfe6965f933fcd17d014104e5a0b4de6c09bd9d3f730ce56ff42657da3a7ec4798c0ace2459fb007236bc3249f70170509ed663da0300023a5de700998bfec49d4da4c66288a58374626c8dffffffff0180969800000000001976a9147f9b1a7fb68d60c536c2fd8aeaa53a8f3cc025a888ac00000000
+{
+  &quot;txid&quot;: &quot;7957a35fe64f80d234d76d83a2a8f1a0d8149a41d81de548f0a65a8a999f6f18&quot;,
+  &quot;hash&quot;: &quot;7957a35fe64f80d234d76d83a2a8f1a0d8149a41d81de548f0a65a8a999f6f18&quot;,
+  &quot;version&quot;: 1,
+  &quot;size&quot;: 225,
+  &quot;vsize&quot;: 225,
+  &quot;weight&quot;: 900,
+  &quot;locktime&quot;: 0,
+  &quot;vin&quot;: [
+    ... 
+  ],
+  &quot;vout&quot;: [
+    {
+      &quot;value&quot;: 0.10000000,
+      &quot;n&quot;: 0,
+      &quot;scriptPubKey&quot;: {
+        &quot;asm&quot;: &quot;OP_DUP OP_HASH160 7f9b1a7fb68d60c536c2fd8aeaa53a8f3cc025a8 OP_EQUALVERIFY OP_CHECKSIG&quot;,
+        &quot;hex&quot;: &quot;76a9147f9b1a7fb68d60c536c2fd8aeaa53a8f3cc025a888ac&quot;,
+        &quot;address&quot;: &quot;1Cdid9KFAaatwczBwBttQcwXYCpvK8h7FK&quot;,
+        &quot;type&quot;: &quot;pubkeyhash&quot;
+      }
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Wed, 16 Feb 2022 15:00:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/16/bitcoinbook_ch3.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/16/bitcoinbook_ch3.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>bitcoin</category>
+        
+        <category>마스터링 비트코인</category>
         
       </item>
     

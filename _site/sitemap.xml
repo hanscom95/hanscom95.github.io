@@ -5,8 +5,8 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Feb 2022 12:24:29 +0900</pubDate>
-    <lastBuildDate>Mon, 28 Feb 2022 12:24:29 +0900</lastBuildDate>
+    <pubDate>Mon, 28 Feb 2022 12:36:28 +0900</pubDate>
+    <lastBuildDate>Mon, 28 Feb 2022 12:36:28 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -25,52 +25,56 @@
 &lt;h2 id=&quot;2-지갑-기술의-개요&quot;&gt;2. 지갑 기술의 개요&lt;/h2&gt;
 &lt;blockquote&gt;
   &lt;p&gt;비트코인 지갑에는 키만 들어있으며, 코인은 들어있지 않다.&lt;/p&gt;
-  &lt;ul&gt;
-    &lt;li&gt;지갑의 분류는 비결정적 지갑, 결정적 지갑으로 나뉜다.
-      &lt;h3 id=&quot;21-비결정적-지갑&quot;&gt;2.1 비결정적 지갑&lt;/h3&gt;
-    &lt;/li&gt;
-    &lt;li&gt;각각의 키가 난수 생성기로부터 독립적으로 생성&lt;/li&gt;
-    &lt;li&gt;지갑 내 키들은 서로 연관성 없음&lt;/li&gt;
-    &lt;li&gt;무작위로 생성한 후 필요한 만큼 추가로 생성하며, 각 키들은 단 한번만 사용
-      &lt;ul&gt;
-        &lt;li&gt;무작위로 뽑은 키들이 한번 생성된 후에는 모두 복사본을 보관해야 함&lt;/li&gt;
-        &lt;li&gt;지갑이 자주 백업되어야 함&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li&gt;주소를 다시 사용하게 되면 여러 건의 거래와 주소가 연관되기 때문에 프라이버시 노출&lt;/li&gt;
-    &lt;li&gt;JBOK지갑(Just a Bunch Of Keys)&lt;br /&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;지갑의 분류는 비결정적 지갑, 결정적 지갑으로 나뉜다.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;21-비결정적-지갑&quot;&gt;2.1 비결정적 지갑&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;각각의 키가 난수 생성기로부터 독립적으로 생성&lt;/li&gt;
+  &lt;li&gt;지갑 내 키들은 서로 연관성 없음&lt;/li&gt;
+  &lt;li&gt;무작위로 생성한 후 필요한 만큼 추가로 생성하며, 각 키들은 단 한번만 사용
+    &lt;ul&gt;
+      &lt;li&gt;무작위로 뽑은 키들이 한번 생성된 후에는 모두 복사본을 보관해야 함&lt;/li&gt;
+      &lt;li&gt;지갑이 자주 백업되어야 함&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;주소를 다시 사용하게 되면 여러 건의 거래와 주소가 연관되기 때문에 프라이버시 노출&lt;/li&gt;
+  &lt;li&gt;JBOK지갑(Just a Bunch Of Keys)&lt;br /&gt;
 &lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_1.png&quot; alt=&quot;그림1&quot; /&gt;&lt;br /&gt;
 그림1 비결정적 지갑: 무작위로 생성된 키 모음&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;22-결정적-지갑&quot;&gt;2.2 결정적 지갑&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;단일 시드(Seed)로부터 많은 키를 쉽게 얻기 위해 개발&lt;/li&gt;
   &lt;li&gt;모든 키가 시드(Seed)라고 알려져있는 하나의 마스터 키에서 파생&lt;/li&gt;
   &lt;li&gt;지갑 내 모든 키들은 서로 연관&lt;/li&gt;
-  &lt;li&gt;시드(Seed) 원본을 가지고 있으면 누구나 다시 지갑 생성 가능
-    &lt;h4 id=&quot;221-일반-결정적-지갑&quot;&gt;2.2.1 일반 결정적 지갑&lt;/h4&gt;
-  &lt;/li&gt;
+  &lt;li&gt;시드(Seed) 원본을 가지고 있으면 누구나 다시 지갑 생성 가능&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;221-일반-결정적-지갑&quot;&gt;2.2.1 일반 결정적 지갑&lt;/h4&gt;
+&lt;ul&gt;
   &lt;li&gt;일반적으로 해시 함수를 이용하여 공통 시드에서 얻은 개인키 보관&lt;/li&gt;
   &lt;li&gt;시드는 개인키를 추출하기 위해 색인번호나 ‘체인코드’등의 여러 데이터와 무작위로 생성된 숫자가 결합되어 있는 형태&lt;br /&gt;
 &lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_2.png&quot; alt=&quot;그림2&quot; /&gt;&lt;br /&gt;
-그림2 결정적(Seed) 지갑: 시드에서 파생된 결정론적 키 시퀀스
-    &lt;h4 id=&quot;222-hd계층결정적-지갑-bip-32bip-44&quot;&gt;2.2.2 HD(계층결정적) 지갑 [BIP-32/BIP-44]&lt;/h4&gt;
-  &lt;/li&gt;
+그림2 결정적(Seed) 지갑: 시드에서 파생된 결정론적 키 시퀀스&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;222-hd계층결정적-지갑-bip-32bip-44&quot;&gt;2.2.2 HD(계층결정적) 지갑 [BIP-32/BIP-44]&lt;/h4&gt;
+&lt;ul&gt;
   &lt;li&gt;결정적 지갑 중 가장 발달된 유형&lt;/li&gt;
   &lt;li&gt;트리 구조에서 생성된 키 보관&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;BIP-32표준에서 규정&lt;/p&gt;
-
+  &lt;li&gt;BIP-32표준에서 규정
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_3.png&quot; alt=&quot;그림3&quot; /&gt;&lt;br /&gt;
+그림3 결정적 지갑: 단일 시드에서 생성된 키 트리
     &lt;blockquote&gt;
       &lt;p&gt;사용자들이 공개키에 대응하는 개인키에 접근하지 않고도 공개키 열을 생성할 수 있음. 안전하지 않은 서버 상에서나 수신 기능만을 가지고 있는 서버에서도 HD지갑 사용 가능하며 각각의 거래에 대해 다른 공개키를 발급 받을 수 있음&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_3.png&quot; alt=&quot;그림3&quot; /&gt;&lt;br /&gt;
-그림3 결정적 지갑: 단일 시드에서 생성된 키 트리&lt;/p&gt;
 
 &lt;h2 id=&quot;3-자세한-지갑-기술&quot;&gt;3. 자세한 지갑 기술&lt;/h2&gt;
 &lt;p&gt;비트코인 지갑 기술이 발전함에 따라 상호운용성, 편리성, 안전성, 유연성 강화를 위한 공통의 산업 표준이 등장&lt;/p&gt;
@@ -88,7 +92,7 @@
   &lt;li&gt;연상기호 코드는 무작위 순열에 비해 쉽게 읽히고 정확하게 입력되기 때문에 사용자들이 지갑을 백업하는 작업을 더욱 수월하게 해준다.&lt;/li&gt;
   &lt;li&gt;연상기호 코드를 이용해 결정론적 지갑을 실행하는 지갑 어플리케이션은 처음 지갑을 생성할 때 12-24 단어로 구성된 단어열을 사용자에게 보여준다. 단어열은 지갑을 백업해 놓은 것으로 동일한 지갑 어플리케이션이나 호환가능한 지갑 어플리케이션안에 들어있는 키 전부를 복원하고 재현하는데 사용할 수 있다.
 &lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_4.png&quot; alt=&quot;그림4&quot; /&gt;
-그림4 엔트로피 생성해서 연상기호 워드로 인코딩 과정
+그림4 엔트로피 생성해서 연상기호 워드로 인코딩 과정&lt;br /&gt;
 &lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch5_5.png&quot; alt=&quot;그림5&quot; /&gt;
 그림5 니모닉에서 시드로
     &lt;blockquote&gt;
@@ -176,23 +180,6 @@ export PKG_CONFIG_PATH=/path/to/libbitcoin-installation/lib/pkgconfig
         <category>마스터링 비트코인</category>
         
         <category>issue</category>
-        
-      </item>
-    
-      <item>
-        <title>wellcome to taehoon blog</title>
-        <description>&lt;h1 id=&quot;개발공부를-위해-오픈한-블로그&quot;&gt;개발공부를 위해 오픈한 블로그&lt;/h1&gt;
-&lt;p&gt;개발을 위주로 공부한걸 올리기 위해 블로그를 열었다.&lt;br /&gt;
-회사에서 하는 업무나 하고 싶은 개발 스터디가 있음 포스팅 해야지…&lt;br /&gt;
-아 1일 1커밋도 이거 떄문에 할 수 있으려나…&lt;br /&gt;
-여행 가고 싶다아…&lt;/p&gt;
-</description>
-        <pubDate>Mon, 21 Feb 2022 15:05:00 +0900</pubDate>
-        <link>https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</link>
-        <guid isPermaLink="true">https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</guid>
-        
-        
-        <category>all</category>
         
       </item>
     
@@ -287,9 +274,9 @@ $ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
-        <pubDate>Wed, 16 Feb 2022 15:00:00 +0900</pubDate>
-        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/16/bitcoinbook_ch3.html</link>
-        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/16/bitcoinbook_ch3.html</guid>
+        <pubDate>Wed, 23 Feb 2022 15:00:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/23/bitcoinbook_ch3.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/23/bitcoinbook_ch3.html</guid>
         
         
         <category>all</category>
@@ -297,6 +284,23 @@ $ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d
         <category>bitcoin</category>
         
         <category>마스터링 비트코인</category>
+        
+      </item>
+    
+      <item>
+        <title>wellcome to taehoon blog</title>
+        <description>&lt;h1 id=&quot;개발공부를-위해-오픈한-블로그&quot;&gt;개발공부를 위해 오픈한 블로그&lt;/h1&gt;
+&lt;p&gt;개발을 위주로 공부한걸 올리기 위해 블로그를 열었다.&lt;br /&gt;
+회사에서 하는 업무나 하고 싶은 개발 스터디가 있음 포스팅 해야지…&lt;br /&gt;
+아 1일 1커밋도 이거 떄문에 할 수 있으려나…&lt;br /&gt;
+여행 가고 싶다아…&lt;/p&gt;
+</description>
+        <pubDate>Mon, 21 Feb 2022 15:05:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</guid>
+        
+        
+        <category>all</category>
         
       </item>
     

@@ -1,7 +1,7 @@
 ---
 layout: post                           # (require) default post layout
 title: "마스터링 비트코인 ch3"                    # (require) a string title
-date: 2022-02-16 15:00:00 +0900       # (require) a post date
+date: 2022-02-23 15:00:00 +0900       # (require) a post date
 categories: [all, bitcoin, 마스터링 비트코인]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
 ---
 

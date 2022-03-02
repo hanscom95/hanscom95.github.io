@@ -5,10 +5,9 @@ date: 2022-02-24 13:10:00 +0900       # (require) a post date
 categories: [all, bitcoin, 마스터링 비트코인, issue]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
 ---
 
-# 마스터링 비트코인 ch4 addr error.'bitcoin/bitcoin.hpp' no such file or directory
+# 마스터링 비트코인 ch4 addr error. `bitcoin/bitcoin.hpp: no such file or directory`
 마스터링 비트코인 ch4장에 나오는 cpp 예제 중 addr.cpp 아래 소스대로 되어야 할 부분이 버전 문제인지 에러가 발생  
-`No package 'libbitcoin' found
-fatal error: bitcoin/bitcoin.hpp: No such file or directory`  
+`No package 'libbitcoin' found fatal error: bitcoin/bitcoin.hpp: No such file or directory`  
 찾아보니 libbitcoin 라이브러리가 최신 버전으로 설치되어 있어 소스를 수정 했다.
 
 **예제**

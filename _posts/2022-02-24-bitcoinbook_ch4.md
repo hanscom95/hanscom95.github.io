@@ -62,14 +62,14 @@ SHA256 함수와 RIPEMD160 함수를 사용. 두 해시함수를 연속적으로
 생성된 공개키 해시 값을 Base58Check으로 인코딩 함수를 사용해서 주소를 생성. 이를 비트코인 주소라 한
 
 
-![그림3](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_3.png)
+![그림3](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_3.png)  
 그림3 공개키에서 비트코인 주소 생성 절차 
 
 ## 5. Key Formats
-사용자가 오류 없이 키를 쉽게 일고 쓸 수 있도록 하기 위해 사용
+사용자가 오류 없이 키를 쉽게 일고 쓸 수 있도록 하기 위해 사용  
 ### 5.1 개인키 formats
-개인키는 256비트 -> 32바이트 -> 16진수 표현 64자리  
-![그림4](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_4.png)
+개인키는 256비트 -> 32바이트 -> 16진수 표현 64자리   
+![그림4](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch4_4.png)  
 그림4 개인키 포맷
 
 ```
@@ -102,6 +102,15 @@ Public Key (hex) is: 04d38d9b84f81fd70c54a868ef3163dc895cba53d53766513ae6c010ce0
 Compressed Public Key (hex) is: 03d38d9b84f81fd70c54a868ef3163dc895cba53d53766513ae6c010ce01fc01cb
 Bitcoin Address (b58check) is: 1EDAkoYYX2bkHJGbeFnQa962KoEoTYRWVy
 Compressed Bitcoin Address (b58check) is: 1A5Ec43i2hSKb4Z1M9vMNWBQoefh8wsFLy
+```
+
+아래 코드 진행시 버전 차이로 인해 error 발생 코드 수정  
+(참조 [ch4 addr error](https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/issue/2022/02/24/bitcoinbook_ch4_addr_code_issue.html))
+```
+$ g++ -o addr ./addr.cpp -std=c++11 $(pkg-config --cflags --libs --static libbitcoin-system)
+$ ./addr
+Public key: 0202a406624211f2abbdc68da3df929f938c3399dd79fac1b51b0e4ad1d26a47aa
+Address: 1PRTTaJesdNovgne6Ehcdu1fpEdX7913CK
 ```
 
 ## ○ 참고문서

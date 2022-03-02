@@ -1,8 +1,10 @@
 ./Gemfile.lock
 ./hanscom95.github.io.iml
 ./.gitignore
+./doc/
+./_example/
 
 .idea
 .jekyll-cache
 
-
+./_site/doc/

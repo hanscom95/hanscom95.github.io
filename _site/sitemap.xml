@@ -5,9 +5,290 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 02 Mar 2022 16:23:53 +0900</pubDate>
-    <lastBuildDate>Wed, 02 Mar 2022 16:23:53 +0900</lastBuildDate>
+    <pubDate>Mon, 07 Mar 2022 16:31:10 +0900</pubDate>
+    <lastBuildDate>Mon, 07 Mar 2022 16:31:10 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>마스터링 비트코인 ch6</title>
+        <description>&lt;h1 id=&quot;마스터링-비트코인-ch6-거래&quot;&gt;마스터링 비트코인 ch6 거래&lt;/h1&gt;
+
+&lt;h2 id=&quot;1-서론&quot;&gt;1. 서론&lt;/h2&gt;
+&lt;p&gt;6장에서 설명하는 지갑은 키가 들어 있는 데이터베이스가 아니라 거래를 구성하는 소프트웨어 이다.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;거래란 비트코인 시스템 내에 있는 참가자들 간 가치를 전송하는 행위를 인코딩한 데이터 구조&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-거래-세부-사항&quot;&gt;2. 거래 세부 사항&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;비트코인 어플리케이션 사용자 인터페이스에서 볼 수 있는 고급 구성 요소들은 비트코인 시스템 내에 실제로 존재하지 않는다.
+    &lt;blockquote&gt;
+      &lt;p&gt;‘실제로 존재하지 않거나 단일 거래에 존재하지 않는다’가 맞는 표현 같음&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;아래 코드는 Raw 트랜잭션을 검색하고 디코딩 내용 이다. 해당 내용으로는 코인, 발신자, 수신자, 잔액, 계정 및 주소가 없다.&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ bitcoin-cli getrawtransaction 7957a35fe64f80d234d76d83a2a8f1a0d8149a41d81de548f0a65a8a999f6f18
+0100000001524d288f25cada331c298e21995ad070e1d1a0793e818f2f7cfb5f6122ef3e71000000008c493046022100a59e516883459706ac2e6ed6a97ef9788942d3c96a0108f2699fa48d9a5725d1022100f9bb4434943e87901c0c96b5f3af4e7ba7b83e12c69b1edbfe6965f933fcd17d014104e5a0b4de6c09bd9d3f730ce56ff42657da3a7ec4798c0ace2459fb007236bc3249f70170509ed663da0300023a5de700998bfec49d4da4c66288a58374626c8dffffffff0180969800000000001976a9147f9b1a7fb68d60c536c2fd8aeaa53a8f3cc025a888ac00000000
+
+$ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d1a0793e818f2f7cfb5f6122ef3e71000000008c493046022100a59e516883459706ac2e6ed6a97ef9788942d3c96a0108f2699fa48d9a5725d1022100f9bb4434943e87901c0c96b5f3af4e7ba7b83e12c69b1edbfe6965f933fcd17d014104e5a0b4de6c09bd9d3f730ce56ff42657da3a7ec4798c0ace2459fb007236bc3249f70170509ed663da0300023a5de700998bfec49d4da4c66288a58374626c8dffffffff0180969800000000001976a9147f9b1a7fb68d60c536c2fd8aeaa53a8f3cc025a888ac00000000
+{
+  &quot;txid&quot;: &quot;7957a35fe64f80d234d76d83a2a8f1a0d8149a41d81de548f0a65a8a999f6f18&quot;,
+  &quot;hash&quot;: &quot;7957a35fe64f80d234d76d83a2a8f1a0d8149a41d81de548f0a65a8a999f6f18&quot;,
+  &quot;version&quot;: 1,
+  &quot;size&quot;: 225,
+  &quot;vsize&quot;: 225,
+  &quot;weight&quot;: 900,
+  &quot;locktime&quot;: 0,
+  &quot;vin&quot;: [
+    {
+      &quot;txid&quot;: &quot;713eef22615ffb7c2f8f813e79a0d1e170d05a99218e291c33daca258f284d52&quot;,
+      &quot;vout&quot;: 0,
+      &quot;scriptSig&quot;: {
+        &quot;asm&quot;: &quot;3046022100a59e516883459706ac2e6ed6a97ef9788942d3c96a0108f2699fa48d9a5725d1022100f9bb4434943e87901c0c96b5f3af4e7ba7b83e12c69b1edbfe6965f933fcd17d[ALL] 04e5a0b4de6c09bd9d3f730ce56ff42657da3a7ec4798c0ace2459fb007236bc3249f70170509ed663da0300023a5de700998bfec49d4da4c66288a58374626c8d&quot;,
+        &quot;hex&quot;: &quot;493046022100a59e516883459706ac2e6ed6a97ef9788942d3c96a0108f2699fa48d9a5725d1022100f9bb4434943e87901c0c96b5f3af4e7ba7b83e12c69b1edbfe6965f933fcd17d014104e5a0b4de6c09bd9d3f730ce56ff42657da3a7ec4798c0ace2459fb007236bc3249f70170509ed663da0300023a5de700998bfec49d4da4c66288a58374626c8d&quot;
+      },
+      &quot;sequence&quot;: 4294967295
+    }
+  ],
+  &quot;vout&quot;: [
+    {
+      &quot;value&quot;: 0.10000000,
+      &quot;n&quot;: 0,
+      &quot;scriptPubKey&quot;: {
+        &quot;asm&quot;: &quot;OP_DUP OP_HASH160 7f9b1a7fb68d60c536c2fd8aeaa53a8f3cc025a8 OP_EQUALVERIFY OP_CHECKSIG&quot;,
+        &quot;hex&quot;: &quot;76a9147f9b1a7fb68d60c536c2fd8aeaa53a8f3cc025a888ac&quot;,
+        &quot;address&quot;: &quot;1Cdid9KFAaatwczBwBttQcwXYCpvK8h7FK&quot;,
+        &quot;type&quot;: &quot;pubkeyhash&quot;
+      }
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3-거래-출력값과-입력값&quot;&gt;3 거래 출력값과 입력값&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;UTXO(Unspent Transaction output)&lt;br /&gt;
+소비되지 않은 거래 출력값&lt;/li&gt;
+  &lt;li&gt;거래
+    &lt;ul&gt;
+      &lt;li&gt;모든 거래는 UTXO세트 내의 변화(상태 변화)를 의미&lt;/li&gt;
+      &lt;li&gt;아래 그림의 UTXO세트에서 점선은 UTXO세트에서 제외될 것이며 녹색 바탕은 UTXO세트로 추가&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;출력값
+    &lt;ul&gt;
+      &lt;li&gt;개별적&lt;/li&gt;
+      &lt;li&gt;나눌 수 없는 가치의 단위&lt;/li&gt;
+      &lt;li&gt;정수로 된 사토시 단위로 표현&lt;/li&gt;
+      &lt;li&gt;소비되지 않은 출력값을 거래에서 통째로 소비될 수만 있음
+        &lt;ul&gt;
+          &lt;li&gt;잔액은 해당 거래에 출력값으로 추가되며 다른 거래의 입력값이 됨&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;코인베이스 거래
+    &lt;ul&gt;
+      &lt;li&gt;입력값과 출력값에 대한 특수한 유형의 거래&lt;/li&gt;
+      &lt;li&gt;각 블록 내의 첫번째 거래&lt;/li&gt;
+      &lt;li&gt;채굴에 성공한 채굴자에 의해 생성&lt;/li&gt;
+      &lt;li&gt;새 비트코인 생성&lt;/li&gt;
+      &lt;li&gt;UTXO를 소비하지 않고 코인베이스라는 이름을 가짐
+        &lt;ul&gt;
+          &lt;li&gt;vin.txid 대신 vin.coinbase&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch6_1.png&quot; alt=&quot;그림1&quot; /&gt;&lt;br /&gt;
+그림1 블록체인을 기반으로 구축되는 Joe에서 Gopesh까지의 트랜잭션 체인&lt;/p&gt;
+
+&lt;h3 id=&quot;31-거래-출력값&quot;&gt;3.1 거래 출력값&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;거래 출력값 구성
+    &lt;ul&gt;
+      &lt;li&gt;비트코인의 최소 단위인 사토시로 표현되는 비트코인 금액&lt;/li&gt;
+      &lt;li&gt;출력값을 소비하기 위해 필요한 조건을 결정하는 암호 퍼즐&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;암호퍼즐
+    &lt;ul&gt;
+      &lt;li&gt;잠금 스크립트(locking script), 서명 스크립트(witness script), scriptPubKey&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;decoderawtransaction 중 vout(위에 코드 값으로 확인)
+    &lt;ul&gt;
+      &lt;li&gt;value.scriptPubKey만 저장됨&lt;/li&gt;
+      &lt;li&gt;그 외 값은 어플리케이션에서 해석&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Field&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;8 bytes(little-endian)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Amount&lt;/td&gt;
+      &lt;td&gt;Bitcoin value in satoshis(10^-8 bitcoin)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1-9 bytes(VarInt)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Locking-Script Size&lt;/td&gt;
+      &lt;td&gt;Locking-Script length in bytes, to follow(실제로 1~9 bytes 중 몇 byte인지 어떻게 확인할 수 있을까?)&lt;br /&gt;인터넷 사이트에는 10,000 bytes까지로 되어 있음&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Variable&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Locking-Script&lt;/td&gt;
+      &lt;td&gt;A script defining the conditions needed to spend the output&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;32-거래-입력값&quot;&gt;3.2 거래 입력값&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;거래 입력값 구성
+    &lt;ul&gt;
+      &lt;li&gt;소비될 UTXO의 거래 ID: 해당 거래의 해시와 일련번호를 참조하여 한 UXTO를 지시&lt;/li&gt;
+      &lt;li&gt;해제 스크립트 : UTXO 소비 요건을 만족하기 위해 지갑을 구성하며 대부분의 해제 스크립트는 비트코인의 소유권을 증명하는 디지털 서명 및 공개키&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;decoderawtransaction 중 vin
+    &lt;ul&gt;
+      &lt;li&gt;거래 ID(txid): 소비될 UTXO가 담겨 있는 거래를 참조(거래에는 여러 UTXO가 있을 수 있음)&lt;/li&gt;
+      &lt;li&gt;출력값 인덱스(vout): 참조 거래에서 어떤 UTXO가 참조될지 식별, 참조 거래 vout배열의 인덱스, 첫번째 UTXO의 값은 0&lt;/li&gt;
+      &lt;li&gt;스크립트 시그(scriptSig): 참조된 UTXO의 조건을 만족하며, 소비를 위해 UTXO를 해제, 앨리스의 지갑이 참조된 UTXO를 추적하고 그에 대한 잠금 스크립틀르 점검한 후 잠금 스크립트를 이용해 필요한 해제 스크립트를 만듦&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;참조 거래의 vout 중 소비될 UTXO가 현재 거래의 vin과 연결&lt;/li&gt;
+  &lt;li&gt;참조 거래를 getrawtransaction, decoderawtransaction한 뒤 vout을 확인
+    &lt;ul&gt;
+      &lt;li&gt;입력값이 0.1 BTC임&lt;/li&gt;
+      &lt;li&gt;잠금 스크립트(scriptPubKey)를 가지고 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Size&lt;/th&gt;
+      &lt;th style=&quot;text-align: center&quot;&gt;Field&lt;/th&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;32 bytes(little-endian)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Transaction Hash&lt;/td&gt;
+      &lt;td&gt;Pointer to the transaction containing the UTXO to be spent&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4 bytes&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Output Index&lt;/td&gt;
+      &lt;td&gt;The index number of the UTXO to be spent; first one is 0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;1-9 bytes(VarInt)&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Unlocking-Script Size&lt;/td&gt;
+      &lt;td&gt;Unlocking-Script length in bytes, to follow(실제로 1~9 bytes 중 몇 byte인지 어떻게 확인할 수 있을까?)&lt;br /&gt;인터넷 사이트에는 10,000 bytes까지로 되어 있음&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Variable&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Unlocking-Script&lt;/td&gt;
+      &lt;td&gt;A script that fulfills the conditions of the UTXO locking script&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;4 bytes&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;Sequence Number&lt;/td&gt;
+      &lt;td&gt;Used for locktime or disabled (0xFFFFFFFF)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;33-거래-수수료&quot;&gt;3.3 거래 수수료&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;비트코인 네트워크를 안전하게 유지해 주는 역할을 하는 비트코인 채굴자들에게 제공하는 일종의 보상금&lt;/li&gt;
+  &lt;li&gt;공격자들이 네트워크를 거래로 넘쳐나게 하는 일을 경제적 측면에서 실행 불가능하게 함으로써 그 자체로 보안 매커니즘의 역할도 함&lt;/li&gt;
+  &lt;li&gt;비트코인 단위로 체굴되는 거래 가치보다는 킬로바이트 단위의 거래 크기를 근거로 계산&lt;/li&gt;
+  &lt;li&gt;비트코인 내의 시장의 힘에 의해 결정&lt;/li&gt;
+  &lt;li&gt;채굴자는 수수료 등 여러 가지 기준에 따라 거래의 우선순위를 정함&lt;/li&gt;
+  &lt;li&gt;특정 거래에서는 무료 거래를 진행하기도 함&lt;/li&gt;
+  &lt;li&gt;비트코인 코어에 수수료 중개(fee relay) 정책이 최소 중개거래 수수료(minrelaytxfee) 옵션에 의해 결정됨&lt;/li&gt;
+  &lt;li&gt;거래의 데이터 구조에는 수수료 필드가 없음&lt;/li&gt;
+  &lt;li&gt;Fees = Sum(Inputs) - Sum(Outputs)&lt;/li&gt;
+  &lt;li&gt;Output에는 반드시 잔액에 대한 출력값도 포함해야 함. 그렇지 않으면 모든 잔액이 수수료로 취급&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4-거래-스크립트와-스크립트-언어&quot;&gt;4 거래 스크립트와 스크립트 언어&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;스크립트 언어는 포스(Forth) 언어처럼 구성되고 역폴란드 표기법을 따르는 스택 기반의 실행 언어&lt;/li&gt;
+  &lt;li&gt;거래가 유효화될 때 입력값 각각에 들어 있는 해제 스크립트(scriptSig)는 소비 조건을 만족하는지 여부를 알아보기 위해 대응되는 잠금 스크립트(scriptPubKey)와 함께 실행&lt;/li&gt;
+  &lt;li&gt;최소한의 프로세싱만 지원하므로 의도적인 보안을 제공&lt;/li&gt;
+  &lt;li&gt;Pay-to-Public-Key-Hash 스크립트 기반이나 매우 다양하고 복잡한 조건을 표현하기 위해 잠금 스크립트를 사용할 수 있음&lt;/li&gt;
+  &lt;li&gt;튜링 불완전성(Turing Incompleteness)
+    &lt;ul&gt;
+      &lt;li&gt;스크립트 언어는 조건부 흐름 제어 기능 이외에는 루프나 복잡한 흐름 제어 능력을 가지고 있지 않음 -&amp;gt; 튜링이 완전하지 않음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;무상태 검증(Stateless Verification)
+    &lt;ul&gt;
+      &lt;li&gt;스크립트 언어는 무상태형&lt;/li&gt;
+      &lt;li&gt;스크립트 언어 내에서는 스크립트 실행 전 혹은 실행 후 저장되는 상태가 없음&lt;/li&gt;
+      &lt;li&gt;스크립트를 실행하는 데 필요한 모든 정보는 스크립트 내에 담겨 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;41-잠금-스크립트locking-script&quot;&gt;4.1 잠금 스크립트(locking script)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;출력값에 위치&lt;/li&gt;
+  &lt;li&gt;향후 출력값을 소비하기 위해 충족되어야 하는 요건을 명시&lt;/li&gt;
+  &lt;li&gt;역사적으로 보통 공개키 혹은 비트코인 주소(공개키 해시)가 담겨 있기 때문에 스크립트펍키(scriptPubKey)라고 부르기도 했음&lt;/li&gt;
+  &lt;li&gt;서명 스크립트(witness script), 암호퍼즐(cryptographic puzzle)들도 추상화되어 모두 같은 개념&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;42-해제-스크립트unlocking-script&quot;&gt;4.2 해제 스크립트(unlocking script)&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;임력값에 위치&lt;/li&gt;
+  &lt;li&gt;잠금 스크립트가 출력값에 놓아 둔 조건을 해결하거나 충족시켜서 출력값이 소비될 수 있도록 하는 스크립트&lt;/li&gt;
+  &lt;li&gt;대부분의 경우 사용자의 지갑이 개인키로부터 생성한 디지털 서명을 담고 있기 때문에 스크립트시그(scriptSig)라고 불림&lt;/li&gt;
+  &lt;li&gt;해제 스크립트 전부가 서명을 포함해야 하는 것은 아님&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch6_2.png&quot; alt=&quot;그림2&quot; /&gt;&lt;br /&gt;
+그림2 scriptSig 및 scriptPubKey를 결합하여 트랜잭션 스크립트 평가&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;거래 입력값(UTXO참조, 해제 스크립트) -&amp;gt; 참조 거래의 UTXO(잠금 스크립트) -&amp;gt; 스크립트 실행(1.해제 스크립트, 2.잠금 스크립트) -&amp;gt; 입력값 유효화&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;-참고문서&quot;&gt;○ 참고문서&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch06.asciidoc&quot;&gt;bitcoinbook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Mon, 07 Mar 2022 11:00:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/03/07/bitcoinbook_ch6.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/03/07/bitcoinbook_ch6.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>bitcoin</category>
+        
+        <category>마스터링 비트코인</category>
+        
+      </item>
     
       <item>
         <title>마스터링 비트코인 ch5</title>

@@ -5,8 +5,8 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 07 Mar 2022 16:31:10 +0900</pubDate>
-    <lastBuildDate>Mon, 07 Mar 2022 16:31:10 +0900</lastBuildDate>
+    <pubDate>Tue, 08 Mar 2022 16:55:18 +0900</pubDate>
+    <lastBuildDate>Tue, 08 Mar 2022 16:55:18 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -14,7 +14,7 @@
         <description>&lt;h1 id=&quot;마스터링-비트코인-ch6-거래&quot;&gt;마스터링 비트코인 ch6 거래&lt;/h1&gt;
 
 &lt;h2 id=&quot;1-서론&quot;&gt;1. 서론&lt;/h2&gt;
-&lt;p&gt;6장에서 설명하는 지갑은 키가 들어 있는 데이터베이스가 아니라 거래를 구성하는 소프트웨어 이다.&lt;/p&gt;
+&lt;p&gt;6장에서 설명하는 지갑은 키가 들어 있는 데이터베이스가 아니라 거래를 구성하는 소프트웨어라고 되어 있다.&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;거래란 비트코인 시스템 내에 있는 참가자들 간 가치를 전송하는 행위를 인코딩한 데이터 구조&lt;/li&gt;
 &lt;/ul&gt;

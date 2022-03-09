@@ -5,8 +5,8 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 08 Mar 2022 16:55:18 +0900</pubDate>
-    <lastBuildDate>Tue, 08 Mar 2022 16:55:18 +0900</lastBuildDate>
+    <pubDate>Wed, 09 Mar 2022 13:25:28 +0900</pubDate>
+    <lastBuildDate>Wed, 09 Mar 2022 13:25:28 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -708,7 +708,7 @@ $ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d
       <item>
         <title>wellcome to taehoon blog</title>
         <description>&lt;h1 id=&quot;개발공부를-위해-오픈한-블로그&quot;&gt;개발공부를 위해 오픈한 블로그&lt;/h1&gt;
-&lt;p&gt;개발을 위주로 공부한걸 올리기 위해 블로그를 열었다.&lt;br /&gt;
+&lt;p&gt;개발에 관한 내용 올리기 위해 블로그를 열었다.&lt;br /&gt;
 회사에서 하는 업무나 하고 싶은 개발 스터디가 있음 포스팅 해야지…&lt;br /&gt;
 아 1일 1커밋도 이거 떄문에 할 수 있으려나…&lt;br /&gt;
 여행 가고 싶다아…&lt;/p&gt;

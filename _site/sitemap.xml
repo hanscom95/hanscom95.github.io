@@ -3,11 +3,93 @@
   <channel>
     <title>달상자 Blog</title>
     <description>공부하려고 만든 블로그</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Mar 2022 10:21:17 +0900</pubDate>
-    <lastBuildDate>Tue, 15 Mar 2022 10:21:17 +0900</lastBuildDate>
+    <link>https://hanscom95.github.io/</link>
+    <atom:link href="https://hanscom95.github.io/sitemap.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 15 Mar 2022 16:49:01 +0900</pubDate>
+    <lastBuildDate>Tue, 15 Mar 2022 16:49:01 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>evernym mobile sdk - simple sponsor</title>
+        <description>&lt;h1 id=&quot;evernym-mobile-sdk---simple-sponsor-install&quot;&gt;evernym mobile sdk - Simple Sponsor install.&lt;/h1&gt;
+&lt;p&gt;evernym react-native-white-label-app을 설치중 Sponsor server 설치가 필요해서 정리해본다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;개발환경&lt;/strong&gt;&lt;br /&gt;
+OS MAC M1 / docker 20.10.8 / Ubuntu:bionic /&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;gitlab&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gitlab.com/evernym/mobile/mobile-sdk/-/tree/main/examples/simple-sponsor&quot;&gt;gitlab&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위에 설치 진행 방식 중 docker로 설치했다. M1이라 ARM 아키텍쳐 구조로 docker platform 설정을 바꿔저야 error가 발생하지 않는다.&lt;/p&gt;
+
+&lt;p&gt;위에 방식 그대로 할시 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Unable to install libindy error&lt;/code&gt;가 발생한다.&lt;/p&gt;
+
+&lt;p&gt;Dockerfile에서 시간대를 서울로 바꿔 주고 필요한 packge들 업데이트&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Dockerfile&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;FROM ubuntu:bionic
+ENV DEBIAN_FRONTEND=&quot;noninteractive&quot; TZ=&quot;Asia/Seoul&quot;
+ARG module
+RUN apt-get update &amp;amp;&amp;amp; apt-get upgrade -y &amp;amp;&amp;amp; apt-get install -y \
+    gnupg \
+    pbuilder \
+    ubuntu-dev-tools \
+    apt-file \
+    software-properties-common \
+    ca-certificates
+
+RUN update-ca-certificates -f -v
+
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys CE7709D068DB5E88 &amp;amp;&amp;amp;\
+    add-apt-repository &quot;deb https://repo.sovrin.org/sdk/deb bionic stable&quot;
+
+RUN apt-get update &amp;amp;&amp;amp; apt-get upgrade -y &amp;amp;&amp;amp; apt-get install -y \
+    python3 \
+    python3-pip \
+    libsodium-dev \
+    libtool \
+    pkg-config \
+    build-essential \
+    autoconf \
+    automake \
+    uuid-dev \
+    wget \
+    libindy
+
+COPY . /app
+WORKDIR /app
+RUN sh zeromq-setup.sh
+
+RUN pip3 install -r requirements.txt
+EXPOSE 4321
+CMD [ &quot;python3&quot;, &quot;server.py&quot; ]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;docker build &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--platform amd64&lt;/code&gt; 명령어 추가&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;docker build and run&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker build --platform amd64 -f Dockerfile -t simple-sponsor .
+$ docker run -it -p 4321:4321 -d simple-sponsor
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 15 Mar 2022 15:40:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/did/ubuntu/docker/issue/2022/03/15/evernym-mobile-sdk-simple-sponsor.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/did/ubuntu/docker/issue/2022/03/15/evernym-mobile-sdk-simple-sponsor.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>DID</category>
+        
+        <category>ubuntu</category>
+        
+        <category>docker</category>
+        
+        <category>issue</category>
+        
+      </item>
     
       <item>
         <title>IT 용어 정리</title>
@@ -74,8 +156,8 @@ Ledger는 Chaincode로 인해 발생하는 모든 거래를 불변하게 기록�
 
 </description>
         <pubDate>Thu, 10 Mar 2022 12:00:00 +0900</pubDate>
-        <link>http://localhost:4000/all/it%20%EC%9A%A9%EC%96%B4/2022/03/10/it-words-list.html</link>
-        <guid isPermaLink="true">http://localhost:4000/all/it%20%EC%9A%A9%EC%96%B4/2022/03/10/it-words-list.html</guid>
+        <link>https://hanscom95.github.io/all/it%20%EC%9A%A9%EC%96%B4/2022/03/10/it-words-list.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/it%20%EC%9A%A9%EC%96%B4/2022/03/10/it-words-list.html</guid>
         
         
         <category>all</category>
@@ -353,8 +435,8 @@ $ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 07 Mar 2022 11:00:00 +0900</pubDate>
-        <link>http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/03/07/bitcoinbook_ch6.html</link>
-        <guid isPermaLink="true">http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/03/07/bitcoinbook_ch6.html</guid>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/03/07/bitcoinbook_ch6.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/03/07/bitcoinbook_ch6.html</guid>
         
         
         <category>all</category>
@@ -471,8 +553,8 @@ $ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d
 &lt;/ul&gt;
 </description>
         <pubDate>Mon, 28 Feb 2022 10:42:00 +0900</pubDate>
-        <link>http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/28/bitcoinbook_ch5.html</link>
-        <guid isPermaLink="true">http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/28/bitcoinbook_ch5.html</guid>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/28/bitcoinbook_ch5.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/28/bitcoinbook_ch5.html</guid>
         
         
         <category>all</category>
@@ -523,8 +605,8 @@ export PKG_CONFIG_PATH=/path/to/libbitcoin-installation/lib/pkgconfig
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Thu, 24 Feb 2022 13:10:00 +0900</pubDate>
-        <link>http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/issue/2022/02/24/bitcoinbook_ch4_addr_code_issue.html</link>
-        <guid isPermaLink="true">http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/issue/2022/02/24/bitcoinbook_ch4_addr_code_issue.html</guid>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/issue/2022/02/24/bitcoinbook_ch4_addr_code_issue.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/issue/2022/02/24/bitcoinbook_ch4_addr_code_issue.html</guid>
         
         
         <category>all</category>
@@ -664,8 +746,8 @@ Address: 1PRTTaJesdNovgne6Ehcdu1fpEdX7913CK
 &lt;/ul&gt;
 </description>
         <pubDate>Thu, 24 Feb 2022 12:00:00 +0900</pubDate>
-        <link>http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/24/bitcoinbook_ch4.html</link>
-        <guid isPermaLink="true">http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/24/bitcoinbook_ch4.html</guid>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/24/bitcoinbook_ch4.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/24/bitcoinbook_ch4.html</guid>
         
         
         <category>all</category>
@@ -768,8 +850,8 @@ $ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Wed, 23 Feb 2022 15:00:00 +0900</pubDate>
-        <link>http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/23/bitcoinbook_ch3.html</link>
-        <guid isPermaLink="true">http://localhost:4000/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/23/bitcoinbook_ch3.html</guid>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/23/bitcoinbook_ch3.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/23/bitcoinbook_ch3.html</guid>
         
         
         <category>all</category>
@@ -789,8 +871,8 @@ $ bitcoin-cli decoderawtransaction 0100000001524d288f25cada331c298e21995ad070e1d
 여행 가고 싶다아…&lt;/p&gt;
 </description>
         <pubDate>Mon, 21 Feb 2022 15:05:00 +0900</pubDate>
-        <link>http://localhost:4000/all/2022/02/21/welcome-to-taehoon_blog.html</link>
-        <guid isPermaLink="true">http://localhost:4000/all/2022/02/21/welcome-to-taehoon_blog.html</guid>
+        <link>https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html</guid>
         
         
         <category>all</category>

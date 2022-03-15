@@ -1,8 +1,8 @@
 ---
 layout: post                           # (require) default post layout
-title: "마스터링 비트코인 ch3"                    # (require) a string title
+title: "IT 용어 정리"                    # (require) a string title
 date: 2022-03-10 12:00:00 +0900       # (require) a post date
-categories: [all, it, 용어사전]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
+categories: [all, IT 용어]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
 ---
 
 # IT 용어 정리

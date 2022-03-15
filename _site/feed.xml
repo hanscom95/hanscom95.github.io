@@ -5,12 +5,12 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 15 Mar 2022 09:59:38 +0900</pubDate>
-    <lastBuildDate>Tue, 15 Mar 2022 09:59:38 +0900</lastBuildDate>
+    <pubDate>Tue, 15 Mar 2022 10:05:12 +0900</pubDate>
+    <lastBuildDate>Tue, 15 Mar 2022 10:05:12 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
-        <title>마스터링 비트코인 ch3</title>
+        <title>IT 용어 정리</title>
         <description>&lt;h1 id=&quot;it-용어-정리&quot;&gt;IT 용어 정리&lt;/h1&gt;
 
 &lt;hr /&gt;
@@ -74,15 +74,13 @@ Ledger는 Chaincode로 인해 발생하는 모든 거래를 불변하게 기록�
 
 </description>
         <pubDate>Thu, 10 Mar 2022 12:00:00 +0900</pubDate>
-        <link>https://hanscom95.github.io/all/it/%EC%9A%A9%EC%96%B4%EC%82%AC%EC%A0%84/2022/03/10/it-words-list.html</link>
-        <guid isPermaLink="true">https://hanscom95.github.io/all/it/%EC%9A%A9%EC%96%B4%EC%82%AC%EC%A0%84/2022/03/10/it-words-list.html</guid>
+        <link>https://hanscom95.github.io/all/it%20%EC%9A%A9%EC%96%B4/2022/03/10/it-words-list.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/it%20%EC%9A%A9%EC%96%B4/2022/03/10/it-words-list.html</guid>
         
         
         <category>all</category>
         
-        <category>it</category>
-        
-        <category>용어사전</category>
+        <category>IT 용어</category>
         
       </item>
     

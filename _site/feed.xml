@@ -5,9 +5,86 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 09 Mar 2022 13:25:28 +0900</pubDate>
-    <lastBuildDate>Wed, 09 Mar 2022 13:25:28 +0900</lastBuildDate>
+    <pubDate>Tue, 15 Mar 2022 09:59:38 +0900</pubDate>
+    <lastBuildDate>Tue, 15 Mar 2022 09:59:38 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>마스터링 비트코인 ch3</title>
+        <description>&lt;h1 id=&quot;it-용어-정리&quot;&gt;IT 용어 정리&lt;/h1&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;블록체인&quot;&gt;블록체인&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;하이퍼렛져 페브릭(Hyperledger Fabric)&lt;/strong&gt;:&lt;br /&gt;
+엔터프라이즈 블록체인 플랫폼을 위한 모듈형 블록체인 프레임워크인 동시에 사실상의 표준&lt;br /&gt;
+개방형의 검증된 엔터프라이즈급 분산 원장 플랫폼&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;아파치 카프카(Apache Kafka)&lt;/strong&gt; :&lt;br /&gt;
+분산 메시지 스트리밍 플랫이며 데이터 파이프 라인을 구성할 때 많이 사용&lt;br /&gt;
+대용량 실시간 로그처리에 특화되어 개발된 오픈소스, 분산 및 복젝 구성과 더불어 Fault-Tolerant 한 안정적인 아키텍처와 빠른 성능으로 데이터를 처리함&lt;br /&gt;
+중앙 집중형 메시지 관리 방식으로, 메시지의 생성과 소비와 관리를 완전히 독립시킨 구조&lt;br /&gt;
+메시지를 관리하는 데이터 큐를 중앙에 두고, 독립적인 데이터의 발행과 소비가 이루어진다. publish / subscribe 모델 패턴&lt;br /&gt;
+프로듀서, 카프카(브로커), 컨슈머, 주키퍼로 분류
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;프로듀서&lt;/strong&gt;: 카프카와 통신하면서 메시지를 보내는 역할&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;컨슈머&lt;/strong&gt;: 카프카와 통신하면서 메시지를 가져오는 역할&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;주키퍼&lt;/strong&gt;: 컨슈머와 통신, 카프카의 메타데이터 정보를 저장, 카프카의 상태관리 등 목적으로 이용&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;주키퍼(Zookeeper)&lt;/strong&gt; :&lt;br /&gt;
+분산 애플리케이션을 위한 코디네이션 시스템이다. 분산 애플리케이션이 안정적인 서비스를 할 수 있도록 분산되어 있는 각 애플리케이션의 정보를 중앙에 집중하고 구성 관리, 그룹 관리 네이밍, 동기화 등의 서비스를 제공한다  &lt;br /&gt;
+서버 여러대를 클러스터로 구성하고, 분산 애플리케이션들이 각각 클라이언트가 되어 주키퍼 서버들과 커넥션을 맺은 후 상태 정보 등을 주고 받는다.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;CA(Certificate Authority)&lt;/strong&gt; :
+    &lt;ul&gt;
+      &lt;li&gt;ID 등록 또는 LDAP에 사용자 레지스트리 연결&lt;/li&gt;
+      &lt;li&gt;등록 인증서 발급(ECERT)&lt;/li&gt;
+      &lt;li&gt;인증서 갱신 및 취소&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Orderer&lt;/strong&gt; :
+    &lt;ul&gt;
+      &lt;li&gt;transaction 순서 관리&lt;/li&gt;
+      &lt;li&gt;특정 채널의 네트워크에 있는 많은 다른 응용 프로그램으로부터 제안 된 원장 갱신을 동시에 받는다. 이 작업은 제안 된 업데이트를 잘 정의 된 순서로 정렬 한 다음 후속 포를 위해 블록으로 패키지화 하는 것  &lt;br /&gt;
+이 블록은 블록체인의 블록이 된다. 일단 Orderer가 원하는 크기의 블록을 생성하거나 최대 경과 시간 후에 블록은 특정 채널에서 연결된 모든 Peer로 전송된다.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Peer&lt;/strong&gt; :&lt;br /&gt;
+장부 상태(Ledger State)와 체인코드(Chaincode)를 관리하는 네트워크 노드  &lt;br /&gt;
+블록체인 네트워크는 Peer들의 집합 이다. Peer들은 Ledgers와 Chaincode(Smart Contracts)에 대해 호스팅하기에 블로체인 네트워크의 기본적인 요소이다.  &lt;br /&gt;
+Ledger는 Chaincode로 인해 발생하는 모든 거래를 불변하게 기록한다.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;DID(Decentralized Identifier)&lt;/strong&gt; :
+    &lt;ul&gt;
+      &lt;li&gt;탈중앙화 신원증명 또는 분산아이디&lt;/li&gt;
+      &lt;li&gt;분산 원장 기술(DLT - Distributed Ledger Technology) 혹은 다른 형태의 분권형 네트워크에 등록되어 있기 때문에 중앙화된 등록 기관에 등록이 필요한지 않은 전세계적으로 유일한 식별자&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SSI(Self-Sovereign identity)&lt;/strong&gt; :
+    &lt;ul&gt;
+      &lt;li&gt;자기 주권 신원&lt;/li&gt;
+      &lt;li&gt;개인에게 디지털 신원에 대한 통제권을 부여하는 디지털 신원에 대한 접근 방식&lt;/li&gt;
+      &lt;li&gt;SSI는 상호 작용에 대한 신뢰 구축의 어려움을 해결&lt;/li&gt;
+      &lt;li&gt;
+        &lt;h2 id=&quot;did를-활용하여-구현&quot;&gt;DID를 활용하여 구현&lt;/h2&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 10 Mar 2022 12:00:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/it/%EC%9A%A9%EC%96%B4%EC%82%AC%EC%A0%84/2022/03/10/it-words-list.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/it/%EC%9A%A9%EC%96%B4%EC%82%AC%EC%A0%84/2022/03/10/it-words-list.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>it</category>
+        
+        <category>용어사전</category>
+        
+      </item>
     
       <item>
         <title>마스터링 비트코인 ch6</title>

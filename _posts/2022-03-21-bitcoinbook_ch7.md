@@ -5,7 +5,7 @@ date: 2022-03-21 12:00:00 +0900       # (require) a post date
 categories: [all, bitcoin, 마스터링 비트코인]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
 ---
 
-# 마스터링 비트코인 ch7 Keys, Address
+# 마스터링 비트코인 ch7 트랜잭션 및 고급 스크립트
 이번 장은 비트코인 암호화 관련된 내용인데 암호화 관련 지식이 없어 내용을 이해하는데 어려움이 생긴다.  
 수학적 내용까지 완벽히 이해 하기 어려우니 겉으로나마 진도를 빼기 위해서 다음 장을 넘어가려고 한다.     
 > 암호화는 비밀을 공개하지 않고 비밀에 대한 지식을 증명하거나(디지털 서명) 데이터의 진위를 증명하는데 사용할 수도 있다.(비트코인 주소)

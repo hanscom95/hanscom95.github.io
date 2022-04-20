@@ -46,12 +46,10 @@ categories: [all, bitcoin, 마스터링 비트코인]          # (custom) some c
 
 P2SH가 없는 복잡한 스크립트  
 |  Locking Script  | 2 PubKey1 PubKey2 PubKey3 PubKey4 PubKey5 5 CHECKMULTISIG |      
-|  ------------------ | ------------------------------------------------------------------------- |  
 |  Unlocking Script  |  0 Sig1 Sig2  |  
 
 P2SH가 있는 복잡한 스크립트      
 |  Redeem Script  |  2 PubKey1 PubKey2 PubKey3 PubKey4 PubKey5 5 CHECKMULTISIG  |  
-|  ------------------------------- | ------------------------------------------------------------------------- |    
 |  Locking Script  |  HASH160 <20-byte hash of redeem script> EQUA L |   
 |  Unlocking Script  |  0 Sig1 Sig2 <redeem script>  |   
 

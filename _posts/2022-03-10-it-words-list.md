@@ -46,7 +46,7 @@ categories: [all, IT 용어]          # (custom) some categories, but makesure t
   - SSI는 상호 작용에 대한 신뢰 구축의 어려움을 해결
   - DID를 활용하여 구현
 * __SPV(Simple payment Verification)__ :
-  - 개래에 대한 모든 블록체인을 저장하지 않고도 트랜잭션을 검증하는 방법
+  - 거래에 대한 모든 블록체인을 저장하지 않고도 트랜잭션을 검증하는 방법
   - 라이트 웨이트 노드(lightweight node) 또는 경량노드라 불림
   - __거래가 블록 내에 있음을 보장__
   - __추가 블록이 체인에 추가된다는 확인 (작업 증명)을 제공. 실제로 거래가 유효한지 알아야 함.__

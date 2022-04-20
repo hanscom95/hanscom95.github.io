@@ -45,13 +45,13 @@ categories: [all, bitcoin, 마스터링 비트코인]          # (custom) some c
   비트코인은 트랜잭션 출력이 사용되기 전까지 UTXO로 관리, UTXO는 램 메모리를 사용하는 비용이 높음
 
 P2SH가 없는 복잡한 스크립트  
-|  Locking Script  | 2 PubKey1 PubKey2 PubKey3 PubKey4 PubKey5 5 CHECKMULTISIG |      
-|  Unlocking Script  |  0 Sig1 Sig2  |  
+|  Locking Script    |  2 PubKey1 PubKey2 PubKey3 PubKey4 PubKey5 5 CHECKMULTISIG  |      
+|  Unlocking Script  |  0 Sig1 Sig2                                                |  
 
 P2SH가 있는 복잡한 스크립트      
-|  Redeem Script  |  2 PubKey1 PubKey2 PubKey3 PubKey4 PubKey5 5 CHECKMULTISIG  |  
-|  Locking Script  |  HASH160 <20-byte hash of redeem script> EQUA L |   
-|  Unlocking Script  |  0 Sig1 Sig2 <redeem script>  |   
+|  Redeem Script     |  2 PubKey1 PubKey2 PubKey3 PubKey4 PubKey5 5 CHECKMULTISIG  |  
+|  Locking Script    |  HASH160 <20-byte hash of redeem script> EQUA L             |   
+|  Unlocking Script  |  0 Sig1 Sig2 <redeem script>                                |   
 
 * P2SH는 공개키 해시 값들을 잠금 스크립트에 포함하지 않고, 별도 스크립트(Redeem Script)로 작성하고 해시 값만을 포함하게 함
 

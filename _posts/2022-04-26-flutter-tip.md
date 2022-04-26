@@ -6,7 +6,7 @@ categories: [all, flutter, issue, tip]          # (custom) some categories, but 
 ---
 
 # Flutter Project Clean 명령어 정리
-flutter project를 clean 설치 하거나 git에서 브런치 밖을때 가끔 build가 안될 경우와 이전 build와 충돌로 인해 에러가 발생할 경우 시도
+flutter project를 clean 설치 하거나 git에서 브런치를 변경할때 가끔 build가 안될 경우와 이전 build와 충돌로 인해 에러가 발생할 경우 시도
 
 **개발환경**  
 OS MAC M1  

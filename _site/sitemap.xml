@@ -5,9 +5,51 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 26 Apr 2022 10:38:49 +0900</pubDate>
-    <lastBuildDate>Tue, 26 Apr 2022 10:38:49 +0900</lastBuildDate>
+    <pubDate>Tue, 26 Apr 2022 10:57:16 +0900</pubDate>
+    <lastBuildDate>Tue, 26 Apr 2022 10:57:16 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Flutter Project clean</title>
+        <description>&lt;h1 id=&quot;flutter-project-clean-명령어-정리&quot;&gt;Flutter Project Clean 명령어 정리&lt;/h1&gt;
+&lt;p&gt;flutter project를 clean 설치 하거나 git에서 브런치 밖을때 가끔 build가 안될 경우와 이전 build와 충돌로 인해 에러가 발생할 경우 시도&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;개발환경&lt;/strong&gt;&lt;br /&gt;
+OS MAC M1&lt;br /&gt;
+[✓] Flutter (Channel master, 2.6.0-12.0.pre.431, on macOS 11.6 20G165 darwin-arm, locale ko-KR)&lt;br /&gt;
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.3)&lt;br /&gt;
+[✓] Xcode - develop for iOS and macOS (Xcode 12.4)&lt;br /&gt;
+[✓] Android Studio (version 4.1)&lt;br /&gt;
+[✓] VS Code (version 1.60.2)&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ flutter clean
+$ ./ios/ rm -rf Pods/  
+$ ./ios/ rm -rf .symlinks  
+$ ./ios/ rm -rf Podfile.lock  
+
+$ ./ios/ pod deintegrate  
+$ flutter packages upgrade  
+$ flutter pub upgrade --major-versions  
+$ sudo gem install cocoapods  
+$ ./ios/ pod repo update       
+$ ./ios/ pod install --repo-update
+$ flutter pub get  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 25 Apr 2022 21:00:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/flutter/issue/tip/2022/04/25/flutter-tip.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/flutter/issue/tip/2022/04/25/flutter-tip.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>flutter</category>
+        
+        <category>issue</category>
+        
+        <category>tip</category>
+        
+      </item>
     
       <item>
         <title>마스터링 비트코인 ch8</title>

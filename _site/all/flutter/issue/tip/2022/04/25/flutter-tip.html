@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="/static/img/favicon.ico" />
-    <title>wellcome to taehoon blog - 달상자 Blog</title>
+    <title>Flutter Project clean - 달상자 Blog</title>
     <meta name="author" content="TAEHOON" />
-    <meta name="description" content="wellcome to taehoon blog" />
-    <meta name="keywords" content="wellcome to taehoon blog, 달상자 Blog, all" />
+    <meta name="description" content="Flutter Project clean" />
+    <meta name="keywords" content="Flutter Project clean, 달상자 Blog, all, flutter, issue, tip" />
     <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
     <meta content="100002479598118" property="fb:app_id">
     <meta content="달상자 Blog" property="og:site_name">
@@ -16,7 +16,7 @@
     
 
     
-      <meta content="wellcome to taehoon blog" property="og:title">
+      <meta content="Flutter Project clean" property="og:title">
       <meta content="article" property="og:type">
     
 
@@ -25,11 +25,11 @@
     
 
     
-      <meta content="https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html" property="og:url">
+      <meta content="https://hanscom95.github.io/all/flutter/issue/tip/2022/04/25/flutter-tip.html" property="og:url">
     
 
     
-      <meta content="2022-02-21T15:05:00+09:00" property="article:published_time">
+      <meta content="2022-04-25T21:00:00+09:00" property="article:published_time">
       <meta content="https://hanscom95.github.io/about/" property="article:author">
     
 
@@ -50,11 +50,11 @@
     <meta name="twitter:creator" content="@">
 
     
-      <meta name="twitter:title" content="wellcome to taehoon blog">
+      <meta name="twitter:title" content="Flutter Project clean">
     
 
     
-      <meta name="twitter:url" content="https://hanscom95.github.io/all/2022/02/21/welcome-to-taehoon_blog.html">
+      <meta name="twitter:url" content="https://hanscom95.github.io/all/flutter/issue/tip/2022/04/25/flutter-tip.html">
     
 
     
@@ -121,22 +121,41 @@
       </div>
       <div class="col-sm-8 col-offset-1 main-layout">
         <header class="post-header">
-  <h1 class="post-title">wellcome to taehoon blog</h1>
+  <h1 class="post-title">Flutter Project clean</h1>
 </header>
 
-<span class="time">21 Feb 2022</span>
+<span class="time">25 Apr 2022</span>
 
   <span class="categories">
-    &raquo; <a href="/category/all">all</a>
+    &raquo; <a href="/category/all">all</a>, <a href="/category/flutter">flutter</a>, <a href="/category/issue">issue</a>, <a href="/category/tip">tip</a>
   </span>
 
 
 <div class="content">
-  <div class="post"><h1 id="개발공부를-위해-오픈한-블로그">개발공부를 위해 오픈한 블로그</h1>
-<p>개발에 관한 내용 올리기 위해 블로그를 열었다.<br />
-회사에서 하는 업무나 하고 싶은 개발 스터디가 있음 포스팅 해야지…<br />
-아 1일 1커밋도 이거 떄문에 할 수 있으려나…<br />
-여행 가고 싶다아…</p>
+  <div class="post"><h1 id="flutter-project-clean-명령어-정리">Flutter Project Clean 명령어 정리</h1>
+<p>flutter project를 clean 설치 하거나 git에서 브런치 밖을때 가끔 build가 안될 경우와 이전 build와 충돌로 인해 에러가 발생할 경우 시도</p>
+
+<p><strong>개발환경</strong><br />
+OS MAC M1<br />
+[✓] Flutter (Channel master, 2.6.0-12.0.pre.431, on macOS 11.6 20G165 darwin-arm, locale ko-KR)<br />
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.3)<br />
+[✓] Xcode - develop for iOS and macOS (Xcode 12.4)<br />
+[✓] Android Studio (version 4.1)<br />
+[✓] VS Code (version 1.60.2)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ flutter clean
+$ ./ios/ rm -rf Pods/  
+$ ./ios/ rm -rf .symlinks  
+$ ./ios/ rm -rf Podfile.lock  
+
+$ ./ios/ pod deintegrate  
+$ flutter packages upgrade  
+$ flutter pub upgrade --major-versions  
+$ sudo gem install cocoapods  
+$ ./ios/ pod repo update       
+$ ./ios/ pod install --repo-update
+$ flutter pub get  
+</code></pre></div></div>
 </div>
   <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -155,31 +174,41 @@
       
         
           
-            
-            <div class="panel-body">
-              <h4>Related Posts</h4>
-              <ul>
-            
-                <li class="relatedPost">
-                  <a href="https://hanscom95.github.io/all/flutter/issue/tip/2022/04/25/flutter-tip.html">Flutter Project clean</a>
-                  
-                    (Categories: <a href="/category/all">all</a>, <a href="/category/flutter">flutter</a>, <a href="/category/issue">issue</a>, <a href="/category/tip">tip</a>)
-                  
-                </li>
-          
-          
-        
       
-    
-        
+          
+      
+          
+      
           
       
     
         
           
       
+          
+      
+          
+      
+          
+      
     
         
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
           
       
     
@@ -188,6 +217,10 @@
       
         
           
+            
+            <div class="panel-body">
+              <h4>Related Posts</h4>
+              <ul>
             
                 <li class="relatedPost">
                   <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/04/13/bitcoinbook_ch8.html">마스터링 비트코인 ch8</a>
@@ -199,12 +232,30 @@
           
         
       
-    
-        
+          
+      
+          
+      
           
       
     
         
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
           
       
     
@@ -224,12 +275,30 @@
           
         
       
-    
-        
+          
+      
+          
+      
           
       
     
         
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
           
       
     
@@ -249,20 +318,50 @@
           
         
       
-    
-        
+          
+      
+          
+      
           
       
     
         
           
       
-    
-        
+          
+      
+          
+      
           
       
     
         
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
           
       
     
@@ -282,8 +381,20 @@
           
         
       
+          
+      
+          
+      
+          
+      
     
         
+          
+      
+          
+      
+          
+      
           
       
     
@@ -303,12 +414,73 @@
           
         
       
-    
-        
+          
+      
+          
+      
           
       
     
         
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/28/bitcoinbook_ch5.html">마스터링 비트코인 ch5</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
           
       
     
@@ -318,46 +490,40 @@
         
           
       
-    
-        
+          
+      
+          
+      
           
       
     
         
           
       
-    
-  
-    
+          
       
-        
+          
+      
           
       
     
         
           
       
-    
-        
+          
+      
+          
+      
           
       
     
         
           
       
-    
-  
-    
-      
-        
           
       
-    
-        
           
       
-    
-        
           
       
     
@@ -367,12 +533,30 @@
         
           
       
-    
-        
+          
+      
+          
+      
           
       
     
         
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
           
       
     
@@ -380,6 +564,45 @@
     
       
         
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
           
       
     
@@ -391,8 +614,8 @@
 
 <div class="PageNavigation">
   
+    <a class="prev" href="/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/04/13/bitcoinbook_ch8.html">&laquo; 마스터링 비트코인 ch8</a>
   
-    <a class="next" href="/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/23/bitcoinbook_ch3.html">마스터링 비트코인 ch3 &raquo;</a>
   
 </div>
 
@@ -401,8 +624,8 @@
   <script type="text/javascript">
     /* <![CDATA[ */
     var disqus_shortname = "hanscom95";
-    var disqus_identifier = "https://hanscom95.github.io_wellcome to taehoon blog";
-    var disqus_title = "wellcome to taehoon blog";
+    var disqus_identifier = "https://hanscom95.github.io_Flutter Project clean";
+    var disqus_title = "Flutter Project clean";
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

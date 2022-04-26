@@ -1,7 +1,7 @@
 ---
 layout: post                                    # (require) default post layout  
 title: "Flutter Project clean"                  # (require) a string title  
-date: 2022-04-26 20:00:00 +0900                 # (require) a post date  
+date: 2022-04-25 21:00:00 +0900                 # (require) a post date  
 categories: [all, flutter, issue, tip]          # (custom) some categories, but makesure these categories already exists inside path of `category/`  
 ---
 

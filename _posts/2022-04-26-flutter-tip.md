@@ -17,6 +17,7 @@ OS MAC M1
 [✓] VS Code (version 1.60.2)  
 
 
+**명령어 정리**
 ```
 $ flutter clean
 $ ./ios/ rm -rf Pods/  

@@ -76,7 +76,7 @@ categories: [all, bitcoin, 마스터링 비트코인]          # (custom) some c
   - 하나가 남을 때까지 2번 과정을 계속 반복되며 하나의 값만 남았을 때까지 이 과정을 반복
   - 최종적으로 남는 하나의 블록은 모든 거래를 합친 해시값을 포함하고 있으며 이를 머클루트(Merkle Root)라고 함
 
-  ![그림3](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_2.png)  
+  ![그림3](https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_3.png)  
   그림3 머클 트리 노드 계산
 
 * 장점

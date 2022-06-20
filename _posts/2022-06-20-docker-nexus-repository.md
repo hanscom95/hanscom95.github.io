@@ -21,7 +21,7 @@ categories: [all, docker, ubuntu]          # (custom) some categories, but makes
 ```
 $ docker volume create nexus 
 ```
-**주의 사항 - symbolic link 걸린 디렉토리를 container에서 바로 volume 호스트 디렉토리 연결시 container down** 
+**주의 사항 - mount된 hdd 디렉토리를 container volume 호스트 디렉토리와 연결시 container down** 
 ### 2. docker contianer 생성(외부 포트 4000, 5000 번 연결)
 4000번은 GUI환경 웹페이지, 5000번은 docker registry
 ```

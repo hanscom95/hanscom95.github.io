@@ -32,3 +32,8 @@ $ ./ios/ pod repo update
 $ ./ios/ pod install --repo-update
 $ flutter pub get  
 ``` 
+
+**git 으로 관리시 yaml 버전 달리지면**
+```
+$ flutter downgrade 2.15.1
+```

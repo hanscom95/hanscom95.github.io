@@ -133,7 +133,7 @@
 
 <div class="content">
   <div class="post"><h1 id="flutter-project-clean-명령어-정리">Flutter Project Clean 명령어 정리</h1>
-<p>flutter project를 clean 설치 하거나 git에서 브런치 밖을때 가끔 build가 안될 경우와 이전 build와 충돌로 인해 에러가 발생할 경우 시도</p>
+<p>flutter project를 clean 설치 하거나 git에서 브런치를 변경할때 가끔 build가 안될 경우와 이전 build와 충돌로 인해 에러가 발생할 경우 시도</p>
 
 <p><strong>개발환경</strong><br />
 OS MAC M1<br />
@@ -143,6 +143,7 @@ OS MAC M1<br />
 [✓] Android Studio (version 4.1)<br />
 [✓] VS Code (version 1.60.2)</p>
 
+<p><strong>명령어 정리</strong></p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ flutter clean
 $ ./ios/ rm -rf Pods/  
 $ ./ios/ rm -rf .symlinks  
@@ -155,6 +156,10 @@ $ sudo gem install cocoapods
 $ ./ios/ pod repo update       
 $ ./ios/ pod install --repo-update
 $ flutter pub get  
+</code></pre></div></div>
+
+<p><strong>git 으로 관리시 yaml 버전 달리지면</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ flutter downgrade 2.15.1
 </code></pre></div></div>
 </div>
   <div id="fb-root"></div>
@@ -174,16 +179,20 @@ $ flutter pub get
       
         
           
-      
+            
+            <div class="panel-body">
+              <h4>Related Posts</h4>
+              <ul>
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/docker/ubuntu/2022/06/20/docker-nexus-repository.html">Docker & Nexus3 Registry 설치 가이드</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/docker">docker</a>, <a href="/category/ubuntu">ubuntu</a>)
+                  
+                </li>
           
-      
           
-      
-          
-      
-    
         
-          
       
           
       
@@ -218,9 +227,134 @@ $ flutter pub get
         
           
             
-            <div class="panel-body">
-              <h4>Related Posts</h4>
-              <ul>
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/31/bitcoinbook_ch10.html">마스터링 비트코인 ch10</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/24/bitcoinbook_ch9.html">마스터링 비트코인 ch9</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
             
                 <li class="relatedPost">
                   <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/04/13/bitcoinbook_ch8.html">마스터링 비트코인 ch8</a>
@@ -370,16 +504,6 @@ $ flutter pub get
       
         
           
-            
-                <li class="relatedPost">
-                  <a href="https://hanscom95.github.io/all/it%20%EC%9A%A9%EC%96%B4/2022/03/10/it-words-list.html">IT 용어 정리</a>
-                  
-                    (Categories: <a href="/category/all">all</a>, <a href="/category/IT 용어">IT 용어</a>)
-                  
-                </li>
-          
-          
-        
       
           
       
@@ -403,16 +527,6 @@ $ flutter pub get
       
         
           
-            
-                <li class="relatedPost">
-                  <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/03/07/bitcoinbook_ch6.html">마스터링 비트코인 ch6</a>
-                  
-                    (Categories: <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>)
-                  
-                </li>
-          
-          
-        
       
           
       
@@ -446,16 +560,6 @@ $ flutter pub get
       
         
           
-            
-                <li class="relatedPost">
-                  <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/02/28/bitcoinbook_ch5.html">마스터링 비트코인 ch5</a>
-                  
-                    (Categories: <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>)
-                  
-                </li>
-          
-          
-        
       
           
       
@@ -616,6 +720,8 @@ $ flutter pub get
   
     <a class="prev" href="/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/04/13/bitcoinbook_ch8.html">&laquo; 마스터링 비트코인 ch8</a>
   
+  
+    <a class="next" href="/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/24/bitcoinbook_ch9.html">마스터링 비트코인 ch9 &raquo;</a>
   
 </div>
 

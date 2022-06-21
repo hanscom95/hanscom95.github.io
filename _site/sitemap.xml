@@ -5,14 +5,480 @@
     <description>공부하려고 만든 블로그</description>
     <link>https://hanscom95.github.io/</link>
     <atom:link href="https://hanscom95.github.io/sitemap.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 26 Apr 2022 10:57:16 +0900</pubDate>
-    <lastBuildDate>Tue, 26 Apr 2022 10:57:16 +0900</lastBuildDate>
+    <pubDate>Tue, 21 Jun 2022 10:52:12 +0900</pubDate>
+    <lastBuildDate>Tue, 21 Jun 2022 10:52:12 +0900</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Docker &amp; Nexus3 Registry 설치 가이드</title>
+        <description>&lt;h1 id=&quot;private-docker-registry-설치-가이드&quot;&gt;Private Docker Registry 설치 가이드&lt;/h1&gt;
+
+&lt;p&gt;개인 도커 repository가 필요해서 GUI 환경을 제공하는 오픈소스 기반 Nexus 설치 가이드 작성&lt;/p&gt;
+
+&lt;h2 id=&quot;데모-환경&quot;&gt;데모 환경&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Ubuntu 20.10&lt;/li&gt;
+  &lt;li&gt;Docker version 20.10.8
+    &lt;ul&gt;
+      &lt;li&gt;최소 1.8이상 필요&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Nexus 3.39.0-01&lt;/li&gt;
+  &lt;li&gt;MAC OS 12.4&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;ubuntu-서버-작업&quot;&gt;ubuntu 서버 작업&lt;/h2&gt;
+&lt;h3 id=&quot;1-docker-volume-생성&quot;&gt;1. docker volume 생성&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker volume create nexus 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;주의 사항 - mount된 hdd 디렉토리를 container volume 호스트 디렉토리와 연결시 container down&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-docker-contianer-생성외부-포트-4000-5000-번-연결&quot;&gt;2. docker contianer 생성(외부 포트 4000, 5000 번 연결)&lt;/h3&gt;
+&lt;p&gt;4000번은 GUI환경 웹페이지, 5000번은 docker registry&lt;br /&gt;
+memory : 3g&lt;br /&gt;
+memory swap : 3g&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker run -d -p 5000:5000 -p 4000:8081 --memory-swap 3g --memory 3g --name nexus -v nexus:/nexus-data -u root sonatype/nexus3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;실행시간이 좀 걸림, 대략 1분?&lt;/p&gt;
+
+&lt;h3 id=&quot;3-nexus-웹-접속-http서버ip4000&quot;&gt;3. nexus 웹 접속 http://서버ip:4000&lt;/h3&gt;
+&lt;p&gt;admin 계정 로그인 패스워드는 container안에 /nexus-data/admin.password 확인&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker exec -it nexus cat /nexus-data/admin.password
+1d671scx-3e78-1s2d-4455-2607d2aj186t
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;4-nexus-blob-stores의-hosted-proxy-생성&quot;&gt;4. Nexus Blob Stores의 hosted, proxy 생성&lt;/h3&gt;
+&lt;p&gt;Administration &amp;gt; Repository &amp;gt; Blob Stores &amp;gt; Create blob store&lt;br /&gt;
+  공통 type : File&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;name : docker-proxy&lt;/li&gt;
+  &lt;li&gt;name : docker-hosted&lt;br /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/docker-nexus-repository_1.png&quot; alt=&quot;create blob&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;5-nexus-repositories의-hosted-proxy-저장소-생성&quot;&gt;5. Nexus Repositories의 hosted, proxy 저장소 생성&lt;/h3&gt;
+&lt;p&gt;Administration &amp;gt; Repository &amp;gt; Repositories &amp;gt; Create repository&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;docker(hosted)&lt;br /&gt;
+name : docker-hosted&lt;br /&gt;
+http : 5000&lt;br /&gt;
+Enable Docker V1 API : true&lt;br /&gt;
+Storage &amp;gt; Blob store : docker-hosted 선택&lt;/li&gt;
+  &lt;li&gt;docker(proxy)&lt;br /&gt;
+name : docker-hub&lt;br /&gt;
+Enable Docker V1 API : true
+Proxy &amp;gt; Remote storage : https://registry-1.docker.io 입력&lt;br /&gt;
+Docker index : Use Docker Hub&lt;br /&gt;
+Storage &amp;gt; Blob store : docker-hub 선택&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/docker-nexus-repository_2.png&quot; alt=&quot;create repositories1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/docker-nexus-repository_3.png&quot; alt=&quot;create repositories2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/docker-nexus-repository_4.png&quot; alt=&quot;create repositories3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/docker-nexus-repository_5.png&quot; alt=&quot;create repositories4&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/docker-nexus-repository_6.png&quot; alt=&quot;create repositories5&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;6-nexus-realms-설정&quot;&gt;6. Nexus Realms 설정&lt;/h3&gt;
+&lt;p&gt;Administration &amp;gt; Security &amp;gt; Realms&lt;br /&gt;
+&lt;strong&gt;Docker Bearer Token Realm&lt;/strong&gt; Active로 이동 후 Save
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/docker-nexus-repository_7.png&quot; alt=&quot;Nexus Realms&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;7-docker-명령어-http-사용-설정서버-ip-입력&quot;&gt;7. docker 명령어 http 사용 설정(서버 ip 입력)&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vi  /etc/docker/daemon.json
+{
+        &quot;insecure-registries&quot; : [&quot;서버ip:5000&quot;]
+}
+
+$ service docker restart
+$ docker restart nexus
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;8-외부에서-접속할-pc와-서버-docker-저장소-연결mac-os-기준&quot;&gt;8. 외부에서 접속할 pc와 서버 docker 저장소 연결(mac os 기준)&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ vi /Users/[사용자이름]/.docker/daemon.json
+{
+        &quot;insecure-registries&quot; : [&quot;서버ip:5000&quot;]
+}
+
+$ service docker restart
+$ docker login 서버ip:5000
+Username: admin
+Password: ***
+
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;9-서버-저장소에-push&quot;&gt;9. 서버 저장소에 push&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker tag myweb:1.0 서버ip:5000/myweb:1.0
+
+$ docker push 서버ip:5000/mynode:1.0
+The push refers to repository [서버ip:5000/myweb]
+a5166b120798: Pushed 
+8a725e53d751: Pushed 
+b991c80c3ef2: Pushed 
+8df6b63c60d4: Pushed 
+d63b53686463: Pushed 
+c0b09410617a: Pushed 
+be9057e6dae4: Pushed 
+4fc242d58285: Pushed 
+1.0: digest: sha256:3ca3522ee4817d3656d7a1bcf4adce3fa8f926e8bb6c5f1ea7ccf6758cc5a88e size: 1984
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;10-서버-저장소-push-image-확인&quot;&gt;10. 서버 저장소 push image 확인&lt;/h3&gt;
+&lt;p&gt;Browse &amp;gt; Browse &amp;gt; docker-hosted &amp;gt; v2 &amp;gt; myweb &amp;gt; tags &amp;gt; 1.0
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/docker-nexus-repository_8.png&quot; alt=&quot;create repositories1&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;11-외부에서-접속할-pc에서-서버-저장소에서-pull&quot;&gt;11. 외부에서 접속할 pc에서 서버 저장소에서 pull&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker pull 서버ip:5000/mynode:1.0
+1.0: Pulling from myweb
+df9b9388f04a: Pull complete 
+5867cba5fcbd: Pull complete 
+4b639e65cb3b: Pull complete 
+061ed9e2b976: Pull complete 
+bc19f3e8eeb1: Pull complete 
+4071be97c256: Pull complete 
+3faab898a72f: Pull complete 
+0404bdb46d0c: Pull complete 
+Digest: sha256:3ca3522ee4817d3656d7a1bcf4adce3fa8f926e8bb6c5f1ea7ccf6758cc5a88e
+Status: Downloaded newer image for 서버ip:5000/myweb:1.0
+서버ip:5000/myweb:1.0
+
+$ docker images
+REPOSITORY                  TAG       IMAGE ID       CREATED        SIZE
+서버ip:5000/myweb            1.0       cc63874a7854   5 weeks ago    23.4MB
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;12-docker-stop-명령어databases-to-fully-shut-down&quot;&gt;12. docker stop 명령어(databases to fully shut down)&lt;/h3&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ docker stop --time=120 nexus
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Mon, 20 Jun 2022 20:00:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/docker/ubuntu/2022/06/20/docker-nexus-repository.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/docker/ubuntu/2022/06/20/docker-nexus-repository.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>docker</category>
+        
+        <category>ubuntu</category>
+        
+      </item>
+    
+      <item>
+        <title>마스터링 비트코인 ch10</title>
+        <description>&lt;h1 id=&quot;마스터링-비트코인-ch10-채굴과-합의&quot;&gt;마스터링 비트코인 ch10 채굴과 합의&lt;/h1&gt;
+
+&lt;h2 id=&quot;1-서론&quot;&gt;1. 서론&lt;/h2&gt;
+&lt;h3 id=&quot;채굴&quot;&gt;채굴&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;분산화된 클리어링하우스의 주요 프로세스로 거래를 검증하고 승인
+    &lt;ul&gt;
+      &lt;li&gt;클리어링하우스
+금융 시장에서 구매자와 판매자 사이에 지정된 중개자로서 거래를 확인하고 완료하여 구매자와 판매자 모두 계약상의 의무를 준수하도록 한다.
+(http://fnwiki.org/clearing-house/)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;비트코인 시스템을 안전하게 보호하고 전 네트워크에 걸쳐 중앙 권력 없이 합의를 이룰 수 있도록 해 줌&lt;/li&gt;
+  &lt;li&gt;새로운 비트코인을 생성하는 것이 아니라 인센티브 시스템일 뿐임&lt;/li&gt;
+  &lt;li&gt;비트코인으 보안이 분산화 되도록 하는 매커니즘
+    &lt;h3 id=&quot;보상&quot;&gt;보상&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;새 블록 각각에서 새로운 코인을 생성&lt;/li&gt;
+  &lt;li&gt;해당 블록 내에 들어 있는 거래 전부로부터 거래 수수료를 받음
+    &lt;h3 id=&quot;작업증명&quot;&gt;작업증명&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;암호화 해시를 기반으로 하는 어려운 수학 문제를 풀기 위해 경쟁&lt;/li&gt;
+  &lt;li&gt;수학 문제에 대한 해답을 작업증명이라고 함&lt;/li&gt;
+  &lt;li&gt;비트코인 보안 모델의 근간
+    &lt;h3 id=&quot;신규-비트코인-공급-반감기&quot;&gt;신규 비트코인 공급 반감기&lt;/h3&gt;
+  &lt;/li&gt;
+  &lt;li&gt;약 4년마다, 210,000 블록&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;채굴-노드&quot;&gt;채굴 노드&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;비트코인 네트워크 상에서 몇몇 노드들은 채굴자라고 불리는 특수 노드들&lt;/li&gt;
+  &lt;li&gt;몇몇 채굴자들은 풀 노드 없이 채굴 작업을 하기도 함&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-블록에-거래-추가하기&quot;&gt;2. 블록에 거래 추가하기&lt;/h2&gt;
+
+&lt;h2 id=&quot;3-블록-식별자---블록-헤더-해시와-블록-높이&quot;&gt;3. 블록 식별자 - 블록 헤더 해시와 블록 높이&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;블록의 디지탈 지문 역할을 하는 암호화 해시(Block Header Hash)
+    &lt;ul&gt;
+      &lt;li&gt;SHA256 알고리즘을 통해 블록 헤더를 2회 해싱해서 얻어지는 결과값&lt;/li&gt;
+      &lt;li&gt;유일하고 확실한 방법으로 해당 블록을 식별하며 모든 노드는 블록 헤더를 간단히 해싱함으로써 독립적으로 블록 해시값을 얻을 수 있음&lt;/li&gt;
+      &lt;li&gt;블록 해시는 실제로 블록의 데이터 구조에 포함되어 있지 않음. 대신 해당 블록을 네트워크에서 전송받으면서 각 노드에 의해 계산됨. 블록의 메타데이터의 일부로 별도의 데이터베이스 테이블 내에 저장될 수 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;블록체인 네트워크의 전체기록에서 확인된 블록의 수(Block Height)
+    &lt;ul&gt;
+      &lt;li&gt;제네시스 블록에서 가장 최근 블록까지의 높이(제네시스 블록 높이 0, 채굴된 첫 번째 블록 높이 1)&lt;/li&gt;
+      &lt;li&gt;블록해시와 달리 블록 높이는 특유의 식별자는 아님
+        &lt;ul&gt;
+          &lt;li&gt;2개 이상의 블록들이 블록체인 내에서 동일한 위치를 점하기 위해 경쟁하면서 동일한 블록 높이 가질 경우 발생
+ &lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_2.png&quot; alt=&quot;그림2&quot; /&gt;&lt;br /&gt;
+ 그림2 2022년 05월 24일 최근 블록 높이&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4-최초블록&quot;&gt;4 최초블록&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;비트코인 제네시스 블록
+    &lt;ul&gt;
+      &lt;li&gt;2009.01.04 03:15:05에 사토시 나카모토가 생성한 첫번째 블록, 블록 높이: 0&lt;/li&gt;
+      &lt;li&gt;제네시스 블록 주소: https://btc.com/btc/transaction/4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b&lt;/li&gt;
+      &lt;li&gt;비트코인 제네시스 블록에 기록된 메시지: “더 타임스 2009.1.3 은행의 두번째 구제 금융을 앞둔 재무장관”
+        &lt;ul&gt;
+          &lt;li&gt;2008년 글로벌 금융위기 이후 중앙기관에 대한 신뢰성 문제가 대두되면서 비트코인 프로젝트를 시작한 동기로 추정&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;최초블록은 비트코인 클라이언트 소프트웨어 내에서 고정적으로 인코딩되어 있기 때문에 모든 노드는 적어도 하나의 블록으로 구성된 블록체인으로 시작하며, 최초블록은 변경 불가.&lt;/li&gt;
+      &lt;li&gt;모든 노드는 최초블록의 해시와 구조, 최초 블록의 생성 시간, 최초블록 내의 단일 거래까지도 항상 알고 있음. 따라서 모든 노드는 블록체인을 생성하는 데 있어 시작점을 가지고 있다고 볼 수 있으며, 최초블록은 신뢰받는 블록체인을 만드는 기반이 되는 안전한 루트&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;5-블록체인에-블록-연결하기&quot;&gt;5 블록체인에 블록 연결하기&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;노드가 네트워크로부터 새로 생성되는 블록을 수신&lt;/li&gt;
+  &lt;li&gt;노드는 수신된 블록의 유효성을 검증하고, 기존 블록체인에 검증을 통과한 블록을 연결  &lt;br /&gt;
+(링크를 설정하기 위해서, 노드는 들어오는 블록의 헤더를 검사하고 이전 블록 해시를 확인)&lt;/li&gt;
+  &lt;li&gt;블록 #1이 생성된 상태에서 블록#2가 네트워크를 통해 수신되면, 노드는 블록#2의 헤더에서 이전 블록의 해시 확인. 더 이전의 블록 해시는 이전 블록인 블록#1의 블록헤더 해시와 동일해야 함. 이렇게 자신이 child(블록#2)가 되고, 이것과 연결된 parent 블록을 찾으면, 생성된 블록을 이용하여 블록체인을 연장&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;6-머클-트리&quot;&gt;6 머클 트리&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;개요
+    &lt;ul&gt;
+      &lt;li&gt;블록 내에서 다수의 원장(ledger)들을 암호화하고 합치는 과정을 반복하여 최종적으로 하나의 유닛(Unit)으로 암호화하는 방법&lt;/li&gt;
+      &lt;li&gt;머클트리의 형태는 블록이 보유하고 있는 거래 내역들의 해시값을 가장 가까운 거래내역끼리 쌍을 지어 해시화하고, 쌍을 지을 수 없을 때까지 해당 과정을 반복하여 완성되는데, 이 과정을 통해 다수의 데이터를 하나로 묶어 용량을 절약&lt;/li&gt;
+      &lt;li&gt;모든 거래내역들을 해시화한 머클루트를 통해 거래내역의 변동여부를 쉽게 확인할 수 있고 이 머클루트를 헤더에 담아 트랜잭션의 유효성을 보장. 즉, 머클트리는 모든 정보를 압축하여 간단하게 표현한 데이터로서 머클트리를 통해 데이터의 간편하고 확실한 인증이 가능&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;생성 과정
+    &lt;ul&gt;
+      &lt;li&gt;최초 데이터를 SHA256형태의 해시값으로 변환&lt;/li&gt;
+      &lt;li&gt;가장 가까운 노드 2개를 한쌍으로 묶어 합친 후 그 값을 해시값으로 변환&lt;/li&gt;
+      &lt;li&gt;하나가 남을 때까지 2번 과정을 계속 반복되며 하나의 값만 남았을 때까지 이 과정을 반복&lt;/li&gt;
+      &lt;li&gt;최종적으로 남는 하나의 블록은 모든 거래를 합친 해시값을 포함하고 있으며 이를 머클루트(Merkle Root)라고 함&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_3.png&quot; alt=&quot;그림3&quot; /&gt;&lt;br /&gt;
+그림3 머클 트리 노드 계산&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;장점
+    &lt;ul&gt;
+      &lt;li&gt;특정 거래내역을 증명하기 위해 모든 거래내역을 검색할 필요 없음. 블록체인은 시간이 지날수록 블록체인에 저장된 데이터가 늘어나 용량이 커지고 거래 처리 속도도 느려질 수밖에 없으며, 따라서 모든 거래 내역을 저장하고 있는 풀노드(full node)와 데이터 일부만을 처리해 보관하는 라이트 노드(light node)를 분리해 거래 처리 속도를 높이는 방법을 선택하는 블록체인도 있음. &lt;br /&gt;
+머클트리의 머클루트가 바로 이 라이트 노드와 같은 역할을 해주며, 머클루트값만 알면 최소한의 정보만으로도 필요한 정보를 블록에서 가져올 수 있음. 블록체인 네트워크 용량 중 큰 부분을 차지하고 있는 
+거래내역을 조회하지 않고 32바이트에 불과한 값 하나로 거래내역 검증을 간편하고 확실하게 할 수 있기 때문에 사양이 낮은 기기들의 네트워크 접근성이 높아지는 동시에 탈중앙화를 통한 네트워크 안정성이 향상&lt;/li&gt;
+      &lt;li&gt;모든 거래내역들이 합하여 해시화된 값이 머클루트이기 때문에 하나의 거래내역에 작은 변화가 생기더라도 상위 해시값 모두가 변하게 됨. 따라서 특정 거래 내역을 확인하기 위해 모든 거래내역을 일일이 검사해야 하는 번거로움을 줄일 수 있음.   &lt;br /&gt;
+또한 거래내역을 위변조하려는 잘못된 해시값이 검출되는 경우 네트워크 접속을 거부할 수 있으며, 이는 기존 거래 내역 일부에 작은 변화가 있기만 해도 상위 해시값이 모두 변환되기 때문임. 네트워크의 접근성은 높아졌지만 동시에 보안성도 높아지는 일석이조의 효과&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;7-머클-트리와-단순지불검증spv&quot;&gt;7 머클 트리와 단순지불검증(SPV)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;SPV 노드는 전체 블록을 다운로드하지 않고, 블록헤더만 다운로드 하기 때문에 전체블록 대비 1,000분의 1정도의 작은 용량만 차지함 따라서, 제한적인 성능의 디바이스나 스마트폰과 같은 환경에서 거래를 하기 위한 용도로 사용&lt;/li&gt;
+  &lt;li&gt;거래정보가 없이 블록헤더만을 가지고 있기 때문에 거래를 위해 블록체인 상의 블록 높이 대신 깊이를 참조해서 거래를 검증함. 블록의 헤더에는 거래의 해시정보가 포함된 머클트리 루트가 포함되어 있음.&lt;/li&gt;
+  &lt;li&gt;아래 그림은 사토시 나카모토의 비트코인 논문에 포함된 머클루트. 각 블록에 포함된 머클루트의 정보를 통해 특정 거래의 존재여부를 확인할 수 있으며, 거래존재가 확인된 블록 이후로 6개의 블록이 쌓인 경우, 해당거래는 유효하다고 판단되어 거래에 사용할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;6-정리&quot;&gt;6 정리&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;블록체인은 분산원장 기술이라고 불림&lt;/li&gt;
+  &lt;li&gt;원본 데이터를 알아볼 수 없도록 해시함수를 사용(위/변조 방지)&lt;/li&gt;
+  &lt;li&gt;저장소 크기를 줄이기 위해 머클 트리(Merkle tree)가 사용&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-참고문서&quot;&gt;○ 참고문서&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch09.asciidoc&quot;&gt;bitcoinbook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 31 May 2022 15:00:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/31/bitcoinbook_ch10.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/31/bitcoinbook_ch10.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>bitcoin</category>
+        
+        <category>마스터링 비트코인</category>
+        
+      </item>
+    
+      <item>
+        <title>마스터링 비트코인 ch9</title>
+        <description>&lt;h1 id=&quot;마스터링-비트코인-ch9-블록체인&quot;&gt;마스터링 비트코인 ch9 블록체인&lt;/h1&gt;
+
+&lt;h2 id=&quot;1-서론&quot;&gt;1. 서론&lt;/h2&gt;
+&lt;p&gt;블록체인 이란 블록으로 이루어진 링크드 리스트&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;비트코인 블록체인은 블록이 뒤로 링크되어 체인의 이전 블록을 각각 참조한다(역 링크 목록)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-블록-구조&quot;&gt;2. 블록 구조&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;블록: 공개 장부인 블록체인에 거래들을 포함시키기 위해 합쳐 놓은 컨테이너 데이터 구조
+    &lt;ul&gt;
+      &lt;li&gt;Header와 Body(거래목록)로 구성&lt;/li&gt;
+      &lt;li&gt;1개의 블록에는 평균 500개 이상의 거래가 담겨지며, 모든 거래가 포함된 후 완성된 블록은 블록 헤더의 크기보다 1,000배 정도 큼&lt;/li&gt;
+      &lt;li&gt;2022.05.24 기준 풀노드 블록 크기: 407.63GB&lt;br /&gt;
+&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_1.png&quot; alt=&quot;그림1&quot; /&gt;&lt;br /&gt;
+그림1 블록 구조&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;블록 헤더
+    &lt;ul&gt;
+      &lt;li&gt;블록 헤더는 블록 메타데이터의 3가지 집합으로 구성&lt;/li&gt;
+      &lt;li&gt;이전 블록 해시값&lt;/li&gt;
+      &lt;li&gt;난이도, 타임스탬프, 논스(채굴 경쟁과 연관)&lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;머클 트리 루트&lt;/p&gt;
+
+        &lt;ol&gt;
+          &lt;li&gt;버전 : 소프트웨어/프로토콜 업그레이드 추적을 위한 버전 번호&lt;/li&gt;
+          &lt;li&gt;이전 블록 해시 : 체인 내 이전 블록(부모)의 해시에 대한 참조값&lt;/li&gt;
+          &lt;li&gt;머클 루트 : 해당 블록에 포함된 거래로부터 생성된 머클 트리의 루트에 대한 해시&lt;/li&gt;
+          &lt;li&gt;타임스탬프 : 블록의 대략적인 생성 시간(유닉스 기준일부터 초단위로 계산)&lt;/li&gt;
+          &lt;li&gt;난이도 목표(bits) : 블록의 작업증명 알고리즘에 대한 난이도 목표&lt;/li&gt;
+          &lt;li&gt;논스(nonce) : 작업증명(Proof of Work) 알고리즘에 사용되는 카운터 역할&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3-블록-식별자---블록-헤더-해시와-블록-높이&quot;&gt;3. 블록 식별자 - 블록 헤더 해시와 블록 높이&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;블록의 디지탈 지문 역할을 하는 암호화 해시(Block Header Hash)
+    &lt;ul&gt;
+      &lt;li&gt;SHA256 알고리즘을 통해 블록 헤더를 2회 해싱해서 얻어지는 결과값&lt;/li&gt;
+      &lt;li&gt;유일하고 확실한 방법으로 해당 블록을 식별하며 모든 노드는 블록 헤더를 간단히 해싱함으로써 독립적으로 블록 해시값을 얻을 수 있음&lt;/li&gt;
+      &lt;li&gt;블록 해시는 실제로 블록의 데이터 구조에 포함되어 있지 않음. 대신 해당 블록을 네트워크에서 전송받으면서 각 노드에 의해 계산됨. 블록의 메타데이터의 일부로 별도의 데이터베이스 테이블 내에 저장될 수 있음&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;블록체인 네트워크의 전체기록에서 확인된 블록의 수(Block Height)
+    &lt;ul&gt;
+      &lt;li&gt;제네시스 블록에서 가장 최근 블록까지의 높이(제네시스 블록 높이 0, 채굴된 첫 번째 블록 높이 1)&lt;/li&gt;
+      &lt;li&gt;블록해시와 달리 블록 높이는 특유의 식별자는 아님
+        &lt;ul&gt;
+          &lt;li&gt;2개 이상의 블록들이 블록체인 내에서 동일한 위치를 점하기 위해 경쟁하면서 동일한 블록 높이 가질 경우 발생
+ &lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_2.png&quot; alt=&quot;그림2&quot; /&gt;&lt;br /&gt;
+ 그림2 2022년 05월 24일 최근 블록 높이&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4-최초블록&quot;&gt;4 최초블록&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;비트코인 제네시스 블록
+    &lt;ul&gt;
+      &lt;li&gt;2009.01.04 03:15:05에 사토시 나카모토가 생성한 첫번째 블록, 블록 높이: 0&lt;/li&gt;
+      &lt;li&gt;제네시스 블록 주소: https://btc.com/btc/transaction/4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b&lt;/li&gt;
+      &lt;li&gt;비트코인 제네시스 블록에 기록된 메시지: “더 타임스 2009.1.3 은행의 두번째 구제 금융을 앞둔 재무장관”
+        &lt;ul&gt;
+          &lt;li&gt;2008년 글로벌 금융위기 이후 중앙기관에 대한 신뢰성 문제가 대두되면서 비트코인 프로젝트를 시작한 동기로 추정&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;최초블록은 비트코인 클라이언트 소프트웨어 내에서 고정적으로 인코딩되어 있기 때문에 모든 노드는 적어도 하나의 블록으로 구성된 블록체인으로 시작하며, 최초블록은 변경 불가.&lt;/li&gt;
+      &lt;li&gt;모든 노드는 최초블록의 해시와 구조, 최초 블록의 생성 시간, 최초블록 내의 단일 거래까지도 항상 알고 있음. 따라서 모든 노드는 블록체인을 생성하는 데 있어 시작점을 가지고 있다고 볼 수 있으며, 최초블록은 신뢰받는 블록체인을 만드는 기반이 되는 안전한 루트&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;5-블록체인에-블록-연결하기&quot;&gt;5 블록체인에 블록 연결하기&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;노드가 네트워크로부터 새로 생성되는 블록을 수신&lt;/li&gt;
+  &lt;li&gt;노드는 수신된 블록의 유효성을 검증하고, 기존 블록체인에 검증을 통과한 블록을 연결  &lt;br /&gt;
+(링크를 설정하기 위해서, 노드는 들어오는 블록의 헤더를 검사하고 이전 블록 해시를 확인)&lt;/li&gt;
+  &lt;li&gt;블록 #1이 생성된 상태에서 블록#2가 네트워크를 통해 수신되면, 노드는 블록#2의 헤더에서 이전 블록의 해시 확인. 더 이전의 블록 해시는 이전 블록인 블록#1의 블록헤더 해시와 동일해야 함. 이렇게 자신이 child(블록#2)가 되고, 이것과 연결된 parent 블록을 찾으면, 생성된 블록을 이용하여 블록체인을 연장&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;6-머클-트리&quot;&gt;6 머클 트리&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;개요
+    &lt;ul&gt;
+      &lt;li&gt;블록 내에서 다수의 원장(ledger)들을 암호화하고 합치는 과정을 반복하여 최종적으로 하나의 유닛(Unit)으로 암호화하는 방법&lt;/li&gt;
+      &lt;li&gt;머클트리의 형태는 블록이 보유하고 있는 거래 내역들의 해시값을 가장 가까운 거래내역끼리 쌍을 지어 해시화하고, 쌍을 지을 수 없을 때까지 해당 과정을 반복하여 완성되는데, 이 과정을 통해 다수의 데이터를 하나로 묶어 용량을 절약&lt;/li&gt;
+      &lt;li&gt;모든 거래내역들을 해시화한 머클루트를 통해 거래내역의 변동여부를 쉽게 확인할 수 있고 이 머클루트를 헤더에 담아 트랜잭션의 유효성을 보장. 즉, 머클트리는 모든 정보를 압축하여 간단하게 표현한 데이터로서 머클트리를 통해 데이터의 간편하고 확실한 인증이 가능&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;생성 과정
+    &lt;ul&gt;
+      &lt;li&gt;최초 데이터를 SHA256형태의 해시값으로 변환&lt;/li&gt;
+      &lt;li&gt;가장 가까운 노드 2개를 한쌍으로 묶어 합친 후 그 값을 해시값으로 변환&lt;/li&gt;
+      &lt;li&gt;하나가 남을 때까지 2번 과정을 계속 반복되며 하나의 값만 남았을 때까지 이 과정을 반복&lt;/li&gt;
+      &lt;li&gt;최종적으로 남는 하나의 블록은 모든 거래를 합친 해시값을 포함하고 있으며 이를 머클루트(Merkle Root)라고 함&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_3.png&quot; alt=&quot;그림3&quot; /&gt;&lt;br /&gt;
+그림3 머클 트리 노드 계산&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;장점
+    &lt;ul&gt;
+      &lt;li&gt;특정 거래내역을 증명하기 위해 모든 거래내역을 검색할 필요 없음. 블록체인은 시간이 지날수록 블록체인에 저장된 데이터가 늘어나 용량이 커지고 거래 처리 속도도 느려질 수밖에 없으며, 따라서 모든 거래 내역을 저장하고 있는 풀노드(full node)와 데이터 일부만을 처리해 보관하는 라이트 노드(light node)를 분리해 거래 처리 속도를 높이는 방법을 선택하는 블록체인도 있음. &lt;br /&gt;
+머클트리의 머클루트가 바로 이 라이트 노드와 같은 역할을 해주며, 머클루트값만 알면 최소한의 정보만으로도 필요한 정보를 블록에서 가져올 수 있음. 블록체인 네트워크 용량 중 큰 부분을 차지하고 있는 
+거래내역을 조회하지 않고 32바이트에 불과한 값 하나로 거래내역 검증을 간편하고 확실하게 할 수 있기 때문에 사양이 낮은 기기들의 네트워크 접근성이 높아지는 동시에 탈중앙화를 통한 네트워크 안정성이 향상&lt;/li&gt;
+      &lt;li&gt;모든 거래내역들이 합하여 해시화된 값이 머클루트이기 때문에 하나의 거래내역에 작은 변화가 생기더라도 상위 해시값 모두가 변하게 됨. 따라서 특정 거래 내역을 확인하기 위해 모든 거래내역을 일일이 검사해야 하는 번거로움을 줄일 수 있음.   &lt;br /&gt;
+또한 거래내역을 위변조하려는 잘못된 해시값이 검출되는 경우 네트워크 접속을 거부할 수 있으며, 이는 기존 거래 내역 일부에 작은 변화가 있기만 해도 상위 해시값이 모두 변환되기 때문임. 네트워크의 접근성은 높아졌지만 동시에 보안성도 높아지는 일석이조의 효과&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;7-머클-트리와-단순지불검증spv&quot;&gt;7 머클 트리와 단순지불검증(SPV)&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;SPV 노드는 전체 블록을 다운로드하지 않고, 블록헤더만 다운로드 하기 때문에 전체블록 대비 1,000분의 1정도의 작은 용량만 차지함 따라서, 제한적인 성능의 디바이스나 스마트폰과 같은 환경에서 거래를 하기 위한 용도로 사용&lt;/li&gt;
+  &lt;li&gt;거래정보가 없이 블록헤더만을 가지고 있기 때문에 거래를 위해 블록체인 상의 블록 높이 대신 깊이를 참조해서 거래를 검증함. 블록의 헤더에는 거래의 해시정보가 포함된 머클트리 루트가 포함되어 있음.&lt;/li&gt;
+  &lt;li&gt;아래 그림은 사토시 나카모토의 비트코인 논문에 포함된 머클루트. 각 블록에 포함된 머클루트의 정보를 통해 특정 거래의 존재여부를 확인할 수 있으며, 거래존재가 확인된 블록 이후로 6개의 블록이 쌓인 경우, 해당거래는 유효하다고 판단되어 거래에 사용할 수 있음&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;6-정리&quot;&gt;6 정리&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;블록체인은 분산원장 기술이라고 불림&lt;/li&gt;
+  &lt;li&gt;원본 데이터를 알아볼 수 없도록 해시함수를 사용(위/변조 방지)&lt;/li&gt;
+  &lt;li&gt;저장소 크기를 줄이기 위해 머클 트리(Merkle tree)가 사용&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;-참고문서&quot;&gt;○ 참고문서&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch09.asciidoc&quot;&gt;bitcoinbook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Tue, 24 May 2022 15:00:00 +0900</pubDate>
+        <link>https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/24/bitcoinbook_ch9.html</link>
+        <guid isPermaLink="true">https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/24/bitcoinbook_ch9.html</guid>
+        
+        
+        <category>all</category>
+        
+        <category>bitcoin</category>
+        
+        <category>마스터링 비트코인</category>
+        
+      </item>
     
       <item>
         <title>Flutter Project clean</title>
         <description>&lt;h1 id=&quot;flutter-project-clean-명령어-정리&quot;&gt;Flutter Project Clean 명령어 정리&lt;/h1&gt;
-&lt;p&gt;flutter project를 clean 설치 하거나 git에서 브런치 밖을때 가끔 build가 안될 경우와 이전 build와 충돌로 인해 에러가 발생할 경우 시도&lt;/p&gt;
+&lt;p&gt;flutter project를 clean 설치 하거나 git에서 브런치를 변경할때 가끔 build가 안될 경우와 이전 build와 충돌로 인해 에러가 발생할 경우 시도&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;개발환경&lt;/strong&gt;&lt;br /&gt;
 OS MAC M1&lt;br /&gt;
@@ -22,6 +488,7 @@ OS MAC M1&lt;br /&gt;
 [✓] Android Studio (version 4.1)&lt;br /&gt;
 [✓] VS Code (version 1.60.2)&lt;/p&gt;
 
+&lt;p&gt;&lt;strong&gt;명령어 정리&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ flutter clean
 $ ./ios/ rm -rf Pods/  
 $ ./ios/ rm -rf .symlinks  
@@ -34,6 +501,10 @@ $ sudo gem install cocoapods
 $ ./ios/ pod repo update       
 $ ./ios/ pod install --repo-update
 $ flutter pub get  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;git 으로 관리시 yaml 버전 달리지면&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ flutter downgrade 2.15.1
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Mon, 25 Apr 2022 21:00:00 +0900</pubDate>
@@ -398,7 +869,7 @@ $ flutter pub get
 &lt;p&gt;이번 장은 앞장에서 다뤘던 내용들의 복잡한 스크립트들을 다룬다.&lt;/p&gt;
 
 &lt;h2 id=&quot;1-서론&quot;&gt;1. 서론&lt;/h2&gt;
-&lt;p&gt;다중서명을 요구하는 스크립트를 이해 하며 다중서명의 문제를 해결하기 위한 P2SH ㄴ&lt;/p&gt;
+&lt;p&gt;다중서명을 요구하는 스크립트를 이해 하며 다중서명의 문제를 해결하기 위한 P2SH&lt;/p&gt;
 
 &lt;h2 id=&quot;2-다중서명multisignature&quot;&gt;2. 다중서명(Multisignature)&lt;/h2&gt;
 &lt;ul&gt;

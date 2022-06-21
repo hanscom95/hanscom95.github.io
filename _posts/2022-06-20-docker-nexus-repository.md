@@ -23,13 +23,15 @@ $ docker volume create nexus
 ```
 **주의 사항 - mount된 hdd 디렉토리를 container volume 호스트 디렉토리와 연결시 container down** 
 ### 2. docker contianer 생성(외부 포트 4000, 5000 번 연결)
-4000번은 GUI환경 웹페이지, 5000번은 docker registry
+4000번은 GUI환경 웹페이지, 5000번은 docker registry  
+memory : 3g  
+memory swap : 3g  
 ```
-$ docker run -d -p 5000:5000 -p 4000:8081 --name nexus -v nexus:/nexus-data -u root sonatype/nexus3
+$ docker run -d -p 5000:5000 -p 4000:8081 --memory-swap 3g --memory 3g --name nexus -v nexus:/nexus-data -u root sonatype/nexus3
 ```
 실행시간이 좀 걸림, 대략 1분?
 
-### 3. nexus 웹 접속 http://xxx.xxx.xxx.xxx:4000
+### 3. nexus 웹 접속 http://서버ip:4000
 admin 계정 로그인 패스워드는 container안에 /nexus-data/admin.password 확인
 ```
 $ docker exec -it nexus cat /nexus-data/admin.password
@@ -107,6 +109,8 @@ Login Succeeded
 
 ### 9. 서버 저장소에 push
 ```
+$ docker tag myweb:1.0 서버ip:5000/myweb:1.0
+
 $ docker push 서버ip:5000/mynode:1.0
 The push refers to repository [서버ip:5000/myweb]
 a5166b120798: Pushed 
@@ -145,4 +149,10 @@ Status: Downloaded newer image for 서버ip:5000/myweb:1.0
 $ docker images
 REPOSITORY                  TAG       IMAGE ID       CREATED        SIZE
 서버ip:5000/myweb            1.0       cc63874a7854   5 weeks ago    23.4MB
+```
+
+
+### 12. docker stop 명령어(databases to fully shut down)
+```
+$ docker stop --time=120 nexus
 ```

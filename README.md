@@ -47,3 +47,6 @@ bundle exec jekyll build
 
 exampe)  
 https://www.earthinversion.com/blogging/how-to-install-jekyll-on-appple-m1-macbook/  
+
+direct vs code website)
+https://github.dev/hanscom95/hanscom95.github.io

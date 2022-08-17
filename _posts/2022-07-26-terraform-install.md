@@ -1,7 +1,7 @@
 ---
-layout: post                           # (require) default post layout
-title: "CICD"                    # (require) a string title
-date: 2022-06-20 20:00:00 +0900       # (require) a post date
+layout: post                          # (require) default post layout
+title: "Terraform 설치 - MAC M1"       # (require) a string title
+date: 2022-07-26 19:00:00 +0900       # (require) a post date
 categories: [all, devops, terraform, aws]          # (custom) some categories, but makesure these categories already exists inside path of `category/`
 ---
 

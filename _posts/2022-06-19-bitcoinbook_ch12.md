@@ -95,4 +95,4 @@ categories: [all, bitcoin, 마스터링 비트코인]          # (custom) some c
       * 오징어게임 NFT(Squid NFT World)
   
 ## ○ 참고문서
-* [bitcoinbook](https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch11.asciidoc)
+* [bitcoinbook](https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch12.asciidoc)

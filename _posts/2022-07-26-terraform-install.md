@@ -41,8 +41,7 @@ $ terraform apply
 ```
 $ terraform destroy
 ```
-***주의 사항***  
-> 오래 걸릴 수 있음
+
 
 ### 5. 생성된 리소스 확인
 ```
@@ -58,11 +57,11 @@ $ terraform state show aws_launch_template.ecs_launch
 ```
 
 ### 7. 개발시 주의 사항
+> 오래 걸릴 수 있음  
 
-# **주의사항**
 > <span style="color:red">로드밸런서 작업시 web AWS target group 생성 후 로드밸런서 **연동 하고** terraform 작업 진행 해야 됨!!!</span>
 
 > target group은 AWS에서 수동으로 작업하는게 좋음
 
-> ecs load_balancer 생성 시 health_check_grace_period_seconds < **300**   
+> ecs load_balancer 생성 시 health_check_grace_period_seconds < **300**
 > health check 404 error 발생 - 수치는 테스트 해봐야 됨

@@ -59,7 +59,7 @@ $ terraform state show aws_launch_template.ecs_launch
 ### 7. 개발시 주의 사항
 > 오래 걸릴 수 있음  
 
-> <span style="color:red">로드밸런서 작업시 web AWS target group 생성 후 로드밸런서 **연동 하고** terraform 작업 진행 해야 됨!!!</span>
+> <span style="color:red">로드밸런서 작업시 web AWS "target group" 생성 후 로드밸런서 **연동 하고** terraform 작업 진행 해야 됨!!!</span>
 
 > target group은 AWS에서 수동으로 작업하는게 좋음
 

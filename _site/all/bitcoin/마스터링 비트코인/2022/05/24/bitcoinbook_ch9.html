@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" />
+    <title>마스터링 비트코인 ch9 - 달상자 Blog</title>
+    <meta name="author" content="TAEHOON" />
+    <meta name="description" content="마스터링 비트코인 ch9" />
+    <meta name="keywords" content="마스터링 비트코인 ch9, 달상자 Blog, all, bitcoin, 마스터링 비트코인" />
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+    <meta content="100002479598118" property="fb:app_id">
+    <meta content="달상자 Blog" property="og:site_name">
+
+    
+
+    
+      <meta content="마스터링 비트코인 ch9" property="og:title">
+      <meta content="article" property="og:type">
+    
+
+    
+      <meta content="공부하려고 만든 블로그" property="og:description">
+    
+
+    
+      <meta content="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/24/bitcoinbook_ch9.html" property="og:url">
+    
+
+    
+      <meta content="2022-05-24T15:00:00+09:00" property="article:published_time">
+      <meta content="https://hanscom95.github.io/about/" property="article:author">
+    
+
+    
+
+    
+      
+        <meta content="all" property="article:section">
+      
+    
+
+    
+      
+    
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+
+    
+      <meta name="twitter:title" content="마스터링 비트코인 ch9">
+    
+
+    
+      <meta name="twitter:url" content="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/24/bitcoinbook_ch9.html">
+    
+
+    
+      <meta name="twitter:description" content="공부하려고 만든 블로그">
+    
+
+    
+
+    <!-- Font awesome icons -->
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/static/css/syntax.css">
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300italic,300,400italic,700&amp;subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/super-search.css">
+    <link rel="stylesheet" href="/static/css/thickbox.css">
+    <link rel="stylesheet" href="/static/css/projects.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+
+    
+  </head>
+  <body>
+    <div class="container">
+      <div class="col-sm-3">
+        <div class="fixed-condition">
+          <h1 class="author-name"><a href="/">TAEHOON</a></h1>
+          
+            <div class="profile-about">
+              개발용 공부를 위해 만든 블로그 입니다. 백엔드를 주로 개발하며 프론트, DevOps, 앱, BlockChain 등도 같이 개발하고 있습니다.
+            </div>
+          
+          <div class="social">
+            <ul>
+              
+                <li><a href="https://www.facebook.com/people/%EB%AC%B8%ED%83%9C%ED%9B%88/100002479598118/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              
+                <li><a href="https://www.instagram.com/moon_developer_93" target="_blank"><i class="fa fa-instagram"></i></a></li>
+              
+                <li><a href="https://github.com/hanscom95" target="_blank"><i class="fa fa-github"></i></a></li>
+              
+            </ul>
+          </div>
+          <div class="search" id="js-search">
+            <input type="text" placeholder="(sitemap)~$ type to search" class="search__input form-control" id="js-search__input">
+            <ul class="search__results" id="js-search__results"></ul>
+          </div>
+          <hr />
+          <ul class="sidebar-nav">
+            <strong>Navigation</strong>
+            <li><a href="/">Home</a></li>
+            
+              <li><a class="about" href="/category/all">Category</a></li>
+            
+              <li><a class="about" href="/projects/">Project</a></li>
+            
+              <li><a class="about" href="https://hanscom95.github.io/about">About Me</a></li>
+            
+          </ul>
+        </div>
+        <!-- end /.fixed-condition -->
+      </div>
+      <div class="col-sm-8 col-offset-1 main-layout">
+        <header class="post-header">
+  <h1 class="post-title">마스터링 비트코인 ch9</h1>
+</header>
+
+<span class="time">24 May 2022</span>
+
+  <span class="categories">
+    &raquo; <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>
+  </span>
+
+
+<div class="content">
+  <div class="post"><h1 id="마스터링-비트코인-ch9-블록체인">마스터링 비트코인 ch9 블록체인</h1>
+
+<h2 id="1-서론">1. 서론</h2>
+<p>블록체인 이란 블록으로 이루어진 링크드 리스트</p>
+<ul>
+  <li>비트코인 블록체인은 블록이 뒤로 링크되어 체인의 이전 블록을 각각 참조한다(역 링크 목록)</li>
+</ul>
+
+<h2 id="2-블록-구조">2. 블록 구조</h2>
+<ul>
+  <li>블록: 공개 장부인 블록체인에 거래들을 포함시키기 위해 합쳐 놓은 컨테이너 데이터 구조
+    <ul>
+      <li>Header와 Body(거래목록)로 구성</li>
+      <li>1개의 블록에는 평균 500개 이상의 거래가 담겨지며, 모든 거래가 포함된 후 완성된 블록은 블록 헤더의 크기보다 1,000배 정도 큼</li>
+      <li>2022.05.24 기준 풀노드 블록 크기: 407.63GB<br />
+<img src="https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_1.png" alt="그림1" /><br />
+그림1 블록 구조</li>
+    </ul>
+  </li>
+  <li>블록 헤더
+    <ul>
+      <li>블록 헤더는 블록 메타데이터의 3가지 집합으로 구성</li>
+      <li>이전 블록 해시값</li>
+      <li>난이도, 타임스탬프, 논스(채굴 경쟁과 연관)</li>
+      <li>
+        <p>머클 트리 루트</p>
+
+        <ol>
+          <li>버전 : 소프트웨어/프로토콜 업그레이드 추적을 위한 버전 번호</li>
+          <li>이전 블록 해시 : 체인 내 이전 블록(부모)의 해시에 대한 참조값</li>
+          <li>머클 루트 : 해당 블록에 포함된 거래로부터 생성된 머클 트리의 루트에 대한 해시</li>
+          <li>타임스탬프 : 블록의 대략적인 생성 시간(유닉스 기준일부터 초단위로 계산)</li>
+          <li>난이도 목표(bits) : 블록의 작업증명 알고리즘에 대한 난이도 목표</li>
+          <li>논스(nonce) : 작업증명(Proof of Work) 알고리즘에 사용되는 카운터 역할</li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="3-블록-식별자---블록-헤더-해시와-블록-높이">3. 블록 식별자 - 블록 헤더 해시와 블록 높이</h2>
+<ul>
+  <li>블록의 디지탈 지문 역할을 하는 암호화 해시(Block Header Hash)
+    <ul>
+      <li>SHA256 알고리즘을 통해 블록 헤더를 2회 해싱해서 얻어지는 결과값</li>
+      <li>유일하고 확실한 방법으로 해당 블록을 식별하며 모든 노드는 블록 헤더를 간단히 해싱함으로써 독립적으로 블록 해시값을 얻을 수 있음</li>
+      <li>블록 해시는 실제로 블록의 데이터 구조에 포함되어 있지 않음. 대신 해당 블록을 네트워크에서 전송받으면서 각 노드에 의해 계산됨. 블록의 메타데이터의 일부로 별도의 데이터베이스 테이블 내에 저장될 수 있음</li>
+    </ul>
+  </li>
+  <li>블록체인 네트워크의 전체기록에서 확인된 블록의 수(Block Height)
+    <ul>
+      <li>제네시스 블록에서 가장 최근 블록까지의 높이(제네시스 블록 높이 0, 채굴된 첫 번째 블록 높이 1)</li>
+      <li>블록해시와 달리 블록 높이는 특유의 식별자는 아님
+        <ul>
+          <li>2개 이상의 블록들이 블록체인 내에서 동일한 위치를 점하기 위해 경쟁하면서 동일한 블록 높이 가질 경우 발생
+ <img src="https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_2.png" alt="그림2" /><br />
+ 그림2 2022년 05월 24일 최근 블록 높이</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="4-최초블록">4 최초블록</h2>
+<ul>
+  <li>비트코인 제네시스 블록
+    <ul>
+      <li>2009.01.04 03:15:05에 사토시 나카모토가 생성한 첫번째 블록, 블록 높이: 0</li>
+      <li>제네시스 블록 주소: https://btc.com/btc/transaction/4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b7afdeda33b</li>
+      <li>비트코인 제네시스 블록에 기록된 메시지: “더 타임스 2009.1.3 은행의 두번째 구제 금융을 앞둔 재무장관”
+        <ul>
+          <li>2008년 글로벌 금융위기 이후 중앙기관에 대한 신뢰성 문제가 대두되면서 비트코인 프로젝트를 시작한 동기로 추정</li>
+        </ul>
+      </li>
+      <li>최초블록은 비트코인 클라이언트 소프트웨어 내에서 고정적으로 인코딩되어 있기 때문에 모든 노드는 적어도 하나의 블록으로 구성된 블록체인으로 시작하며, 최초블록은 변경 불가.</li>
+      <li>모든 노드는 최초블록의 해시와 구조, 최초 블록의 생성 시간, 최초블록 내의 단일 거래까지도 항상 알고 있음. 따라서 모든 노드는 블록체인을 생성하는 데 있어 시작점을 가지고 있다고 볼 수 있으며, 최초블록은 신뢰받는 블록체인을 만드는 기반이 되는 안전한 루트</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="5-블록체인에-블록-연결하기">5 블록체인에 블록 연결하기</h2>
+<ul>
+  <li>노드가 네트워크로부터 새로 생성되는 블록을 수신</li>
+  <li>노드는 수신된 블록의 유효성을 검증하고, 기존 블록체인에 검증을 통과한 블록을 연결  <br />
+(링크를 설정하기 위해서, 노드는 들어오는 블록의 헤더를 검사하고 이전 블록 해시를 확인)</li>
+  <li>블록 #1이 생성된 상태에서 블록#2가 네트워크를 통해 수신되면, 노드는 블록#2의 헤더에서 이전 블록의 해시 확인. 더 이전의 블록 해시는 이전 블록인 블록#1의 블록헤더 해시와 동일해야 함. 이렇게 자신이 child(블록#2)가 되고, 이것과 연결된 parent 블록을 찾으면, 생성된 블록을 이용하여 블록체인을 연장</li>
+</ul>
+
+<h2 id="6-머클-트리">6 머클 트리</h2>
+<ul>
+  <li>개요
+    <ul>
+      <li>블록 내에서 다수의 원장(ledger)들을 암호화하고 합치는 과정을 반복하여 최종적으로 하나의 유닛(Unit)으로 암호화하는 방법</li>
+      <li>머클트리의 형태는 블록이 보유하고 있는 거래 내역들의 해시값을 가장 가까운 거래내역끼리 쌍을 지어 해시화하고, 쌍을 지을 수 없을 때까지 해당 과정을 반복하여 완성되는데, 이 과정을 통해 다수의 데이터를 하나로 묶어 용량을 절약</li>
+      <li>모든 거래내역들을 해시화한 머클루트를 통해 거래내역의 변동여부를 쉽게 확인할 수 있고 이 머클루트를 헤더에 담아 트랜잭션의 유효성을 보장. 즉, 머클트리는 모든 정보를 압축하여 간단하게 표현한 데이터로서 머클트리를 통해 데이터의 간편하고 확실한 인증이 가능</li>
+    </ul>
+  </li>
+  <li>생성 과정
+    <ul>
+      <li>최초 데이터를 SHA256형태의 해시값으로 변환</li>
+      <li>가장 가까운 노드 2개를 한쌍으로 묶어 합친 후 그 값을 해시값으로 변환</li>
+      <li>하나가 남을 때까지 2번 과정을 계속 반복되며 하나의 값만 남았을 때까지 이 과정을 반복</li>
+      <li>최종적으로 남는 하나의 블록은 모든 거래를 합친 해시값을 포함하고 있으며 이를 머클루트(Merkle Root)라고 함</li>
+    </ul>
+
+    <p><img src="https://raw.githubusercontent.com/hanscom95/hanscom95.github.io/master/static/img/_posts/bitcoinbook_ch9_3.png" alt="그림3" /><br />
+그림3 머클 트리 노드 계산</p>
+  </li>
+  <li>장점
+    <ul>
+      <li>특정 거래내역을 증명하기 위해 모든 거래내역을 검색할 필요 없음. 블록체인은 시간이 지날수록 블록체인에 저장된 데이터가 늘어나 용량이 커지고 거래 처리 속도도 느려질 수밖에 없으며, 따라서 모든 거래 내역을 저장하고 있는 풀노드(full node)와 데이터 일부만을 처리해 보관하는 라이트 노드(light node)를 분리해 거래 처리 속도를 높이는 방법을 선택하는 블록체인도 있음. <br />
+머클트리의 머클루트가 바로 이 라이트 노드와 같은 역할을 해주며, 머클루트값만 알면 최소한의 정보만으로도 필요한 정보를 블록에서 가져올 수 있음. 블록체인 네트워크 용량 중 큰 부분을 차지하고 있는 
+거래내역을 조회하지 않고 32바이트에 불과한 값 하나로 거래내역 검증을 간편하고 확실하게 할 수 있기 때문에 사양이 낮은 기기들의 네트워크 접근성이 높아지는 동시에 탈중앙화를 통한 네트워크 안정성이 향상</li>
+      <li>모든 거래내역들이 합하여 해시화된 값이 머클루트이기 때문에 하나의 거래내역에 작은 변화가 생기더라도 상위 해시값 모두가 변하게 됨. 따라서 특정 거래 내역을 확인하기 위해 모든 거래내역을 일일이 검사해야 하는 번거로움을 줄일 수 있음.   <br />
+또한 거래내역을 위변조하려는 잘못된 해시값이 검출되는 경우 네트워크 접속을 거부할 수 있으며, 이는 기존 거래 내역 일부에 작은 변화가 있기만 해도 상위 해시값이 모두 변환되기 때문임. 네트워크의 접근성은 높아졌지만 동시에 보안성도 높아지는 일석이조의 효과</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="7-머클-트리와-단순지불검증spv">7 머클 트리와 단순지불검증(SPV)</h2>
+<ul>
+  <li>SPV 노드는 전체 블록을 다운로드하지 않고, 블록헤더만 다운로드 하기 때문에 전체블록 대비 1,000분의 1정도의 작은 용량만 차지함 따라서, 제한적인 성능의 디바이스나 스마트폰과 같은 환경에서 거래를 하기 위한 용도로 사용</li>
+  <li>거래정보가 없이 블록헤더만을 가지고 있기 때문에 거래를 위해 블록체인 상의 블록 높이 대신 깊이를 참조해서 거래를 검증함. 블록의 헤더에는 거래의 해시정보가 포함된 머클트리 루트가 포함되어 있음.</li>
+  <li>아래 그림은 사토시 나카모토의 비트코인 논문에 포함된 머클루트. 각 블록에 포함된 머클루트의 정보를 통해 특정 거래의 존재여부를 확인할 수 있으며, 거래존재가 확인된 블록 이후로 6개의 블록이 쌓인 경우, 해당거래는 유효하다고 판단되어 거래에 사용할 수 있음</li>
+</ul>
+
+<h2 id="6-정리">6 정리</h2>
+<ul>
+  <li>블록체인은 분산원장 기술이라고 불림</li>
+  <li>원본 데이터를 알아볼 수 없도록 해시함수를 사용(위/변조 방지)</li>
+  <li>저장소 크기를 줄이기 위해 머클 트리(Merkle tree)가 사용</li>
+</ul>
+
+<h2 id="-참고문서">○ 참고문서</h2>
+<ul>
+  <li><a href="https://github.com/bitcoinbook/bitcoinbook/blob/develop/ch09.asciidoc">bitcoinbook</a></li>
+</ul>
+</div>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=100002479598118";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+</div>
+
+
+  
+    
+      
+        
+          
+            
+            <div class="panel-body">
+              <h4>Related Posts</h4>
+              <ul>
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/docker/ubuntu/2022/06/20/docker-nexus-repository.html">Docker & Nexus3 Registry 설치 가이드</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/docker">docker</a>, <a href="/category/ubuntu">ubuntu</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/31/bitcoinbook_ch10.html">마스터링 비트코인 ch10</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/flutter/issue/tip/2022/04/25/flutter-tip.html">Flutter Project clean</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/flutter">flutter</a>, <a href="/category/issue">issue</a>, <a href="/category/tip">tip</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/04/13/bitcoinbook_ch8.html">마스터링 비트코인 ch8</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/03/21/bitcoinbook_ch7.html">마스터링 비트코인 ch7</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/bitcoin">bitcoin</a>, <a href="/category/마스터링 비트코인">마스터링 비트코인</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+            
+                <li class="relatedPost">
+                  <a href="https://hanscom95.github.io/all/did/ubuntu/docker/issue/2022/03/15/evernym-mobile-sdk-simple-sponsor.html">evernym mobile sdk - simple sponsor</a>
+                  
+                    (Categories: <a href="/category/all">all</a>, <a href="/category/DID">DID</a>, <a href="/category/ubuntu">ubuntu</a>, <a href="/category/docker">docker</a>, <a href="/category/issue">issue</a>)
+                  
+                </li>
+          
+          
+        
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+        
+          
+      
+          
+      
+          
+      
+    
+  
+    
+      
+        
+          
+      
+          
+      
+          
+      
+    
+  
+  
+  </ul>
+</div>
+
+
+<div class="PageNavigation">
+  
+    <a class="prev" href="/all/flutter/issue/tip/2022/04/25/flutter-tip.html">&laquo; Flutter Project clean</a>
+  
+  
+    <a class="next" href="/all/bitcoin/%EB%A7%88%EC%8A%A4%ED%84%B0%EB%A7%81%20%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8/2022/05/31/bitcoinbook_ch10.html">마스터링 비트코인 ch10 &raquo;</a>
+  
+</div>
+
+<div class="disqus-comments">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+    /* <![CDATA[ */
+    var disqus_shortname = "hanscom95";
+    var disqus_identifier = "https://hanscom95.github.io_마스터링 비트코인 ch9";
+    var disqus_title = "마스터링 비트코인 ch9";
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    /* ]]> */
+  </script>
+</div>
+
+        <footer>
+          &copy; TAEHOON
+          
+            - <a href="https://github.com/hanscom95">https://github.com/hanscom95</a> - Powered by Jekyll.
+          
+          <div class="btn-github" style="float:right;">
+            <iframe src="https://ghbtns.com/github-btn.html?user=hanscom95&repo=hanscom95.github.io&type=star&count=true" frameborder="0" scrolling="0" width="100" height="20px"></iframe>
+            <iframe src="https://ghbtns.com/github-btn.html?user=hanscom95&repo=hanscom95.github.io&type=fork&count=true" frameborder="0" scrolling="0" width="100" height="20px"></iframe>
+          </div>
+        </footer>
+      </div>
+      <!-- end /.col-sm-8 -->
+    </div>
+    <!-- end /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/super-search.js"></script>
+    <script src="/static/js/thickbox-compressed.js"></script>
+    <script src="/static/js/projects.js"></script>
+  </body>
+</html>
+

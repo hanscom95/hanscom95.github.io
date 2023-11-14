@@ -1,8 +1,8 @@
 ---
 layout: post                                 # (require) default post layout
-title: "AWS ALB ERR_TOO_MANY_REDIRECTS 에러"  # (require) a string title
-date: 2023-05-08 19:00:00 +0900              # (require) a post date
-categories: [all, devops, aws, ssl, error]   # (custom) some categories, but makesure these categories already exists inside path of `category/`
+title: "개발자도 알아야할 소프트웨어 테스팅 실무 ch5 "  # (require) a string title
+date: 2023-03-22 18:00:00 +0900              # (require) a post date
+categories: [all, devops, security, tester]   # (custom) some categories, but makesure these categories already exists inside path of `category/`
 ---
 
 # 리스크와 테스팅(Risk and testing)
